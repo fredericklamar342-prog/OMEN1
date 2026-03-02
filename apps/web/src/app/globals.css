@@ -33,16 +33,23 @@ body {
   h4,
   h5,
   h6 {
-    @apply font-bold tracking-tight;
+    font-weight: 700;
+    letter-spacing: -0.025em;
   }
 
   h1 {
-    @apply text-4xl mb-8;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin-bottom: 2rem;
   }
   h2 {
-    @apply text-3xl mb-6;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin-bottom: 1.5rem;
   }
   h3 {
-    @apply text-2xl mb-4;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
   }
 }
