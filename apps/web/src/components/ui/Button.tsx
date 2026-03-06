@@ -16,42 +16,47 @@ export interface ButtonProps
 }
 
 const variants = {
-  primary: "bg-foreground text-background hover:bg-accent focus:ring-accent",
-  secondary: "bg-background text-foreground border border-border hover:bg-gray-50 focus:ring-border",
-  link: "bg-transparent text-accent hover:underline p-0 h-auto focus:ring-accent",
+  primary: [
+    "bg-gradient-to-r from-[#0C1446] via-[#2B5C92] to-[#B3CDE0]",
+    "bg-[length:200%_auto]",
+    "text-white border-none",
+    "shadow-[0_8px_20px_rgba(43,92,146,0.25)]",
+    "hover:bg-[position:right_center]",
+    "hover:scale-[1.03]",
+    "hover:shadow-[0_12px_30px_rgba(43,92,146,0.35)]",
+    "active:scale-100 active:shadow-[0_8px_20px_rgba(43,92,146,0.25)]",
+  ].join(" "),
+
+  secondary: [
+    "bg-white/62 backdrop-blur-[20px]",
+    "text-[#0C1446]",
+    "border border-white/85",
+    "shadow-[0_4px_12px_rgba(11,18,32,0.05)]",
+    "hover:-translate-y-[2px]",
+    "hover:shadow-[0_8px_24px_rgba(43,92,146,0.15)] hover:border-white",
+    "active:translate-y-0",
+  ].join(" "),
+
+  link: "bg-transparent text-[#2B5C92] hover:text-[#0C1446] p-0 h-auto",
 };
 
 const sizes = {
-  default: "h-10 px-4 py-2",
-  sm: "h-8 px-3 text-xs",
-  lg: "h-12 px-8 text-lg",
+  default: "h-12 px-8 text-sm font-semibold rounded-full",
+  sm:      "h-10 px-6 text-xs font-semibold rounded-full",
+  lg:      "h-14 px-10 text-base font-semibold rounded-full",
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "default", isLoading, asChild = false, ...props }, ref) => {
-    if (asChild) {
-      return (
-        <Slot
-          className={cn(
-            "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
-            variants[variant],
-            variant !== "link" && sizes[size],
-            className
-          )}
-          ref={ref}
-          {...props}
-        >
-          {/* Slot expects exactly one child. If isLoading, we show the loading state on the child if possible, 
-              or just render the child. Cloning with complex logic can break build/SSR. */}
-          {props.children}
-        </Slot>
-      );
-    }
+  ({ className, variant = "primary", size = "default", isLoading, asChild = false, children, ...props }, ref) => {
+    const Component = asChild ? Slot : "button";
 
     return (
-      <button
+      <Component
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
+          "inline-flex items-center justify-center whitespace-nowrap",
+          "transition-all duration-300 ease-out",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B5C92]/40 focus-visible:ring-offset-2",
+          "disabled:pointer-events-none disabled:opacity-40",
           variants[variant],
           variant !== "link" && sizes[size],
           className
@@ -60,11 +65,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={props.disabled || isLoading}
         {...props}
       >
-        {isLoading && (
-          <span className="mr-2 h-4 w-4 animate-spin border-2 border-current border-t-transparent rounded-full" />
+        {asChild ? (
+          children
+        ) : (
+          <>
+            {isLoading && (
+              <span className="mr-2 h-4 w-4 animate-spin border-2 border-current border-t-transparent rounded-full" />
+            )}
+            {children}
+          </>
         )}
-        {props.children}
-      </button>
+      </Component>
     );
   }
 );

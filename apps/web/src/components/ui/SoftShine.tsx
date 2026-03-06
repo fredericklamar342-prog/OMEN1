@@ -13,19 +13,19 @@ interface SoftShineProps {
 export function SoftShine({ className }: SoftShineProps) {
   return (
     <div className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
-      {/* subtle grid texture */}
+      {/* subtle grid texture - darkened */}
       <div
-        className="absolute inset-0 opacity-[0.25]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgba(229,231,235,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(229,231,235,0.5) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
+            "linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
         }}
       />
       
-      {/* glows */}
-      <div className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-white blur-3xl opacity-80" />
-      <div className="absolute bottom-[-120px] right-[5%] h-[420px] w-[420px] rounded-full bg-white blur-3xl opacity-55" />
+      {/* glows - cyber aesthetic */}
+      <div className="absolute -top-60 left-1/4 h-[800px] w-[800px] rounded-full bg-accent/5 blur-[120px] opacity-20" />
+      <div className="absolute top-1/2 -right-40 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#2F81F7]/5 blur-[100px] opacity-20" />
     </div>
   );
 }

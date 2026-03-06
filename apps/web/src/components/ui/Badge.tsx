@@ -12,16 +12,16 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 
 function Badge({ className, variant = "default", ...props }: BadgeProps) {
   const variants = {
-    default: "border-[#E6E8EB] text-[#6B7280] bg-[#FAFBFC]",
-    verified: "border-[#10B981]/20 text-[#059669] bg-[#10B981]/10",
-    watchlist: "border-[#F59E0B]/20 text-[#D97706] bg-[#F59E0B]/10",
-    revoked: "bg-[#8B0000] text-white border-[#8B0000]",
+    default: "border-white/10 text-subtext bg-white/5",
+    verified: "border-green-500/20 text-green-400 bg-green-500/5",
+    watchlist: "border-blue-500/20 text-blue-400 bg-blue-500/5",
+    revoked: "bg-accent text-white border-accent shadow-[0_0_15px_rgba(177,18,38,0.2)]",
   };
 
   return (
     <div
       className={cn(
-        "inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        "inline-flex items-center border px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest transition-all",
         variants[variant],
         className
       )}

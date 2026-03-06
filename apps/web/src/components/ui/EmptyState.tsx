@@ -24,19 +24,20 @@ function EmptyState({
   return (
     <div
       className={cn(
-        "flex min-h-[400px] flex-col items-center justify-center p-8 text-center border border-dashed border-border transition-all",
+        "flex min-h-[400px] flex-col items-center justify-center p-12 text-center border border-dashed border-border/50 bg-surface/30 backdrop-blur-sm transition-all relative overflow-hidden",
         className
       )}
       {...props}
     >
-      {icon && <div className="mb-4 text-subtext">{icon}</div>}
-      <h3 className="text-xl font-bold text-foreground">{title}</h3>
+      <div className="absolute inset-0 bg-accent/[0.01] pointer-events-none" />
+      {icon && <div className="mb-6 text-subtext/40">{icon}</div>}
+      <h3 className="text-xl font-bold tracking-tight text-foreground uppercase">{title}</h3>
       {description && (
-        <p className="mt-2 text-sm text-subtext max-w-xs mx-auto">
+        <p className="mt-3 text-sm text-subtext/60 max-w-sm mx-auto font-mono text-[11px] uppercase tracking-widest leading-relaxed">
           {description}
         </p>
       )}
-      {action && <div className="mt-6">{action}</div>}
+      {action && <div className="mt-10">{action}</div>}
     </div>
   );
 }

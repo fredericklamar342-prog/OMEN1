@@ -3,118 +3,130 @@
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { scrollToId } from "@/utils/scroll";
 
 export function Nav() {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [isConnecting, setIsConnecting] = React.useState(false);
-  const [walletAddress, setWalletAddress] = React.useState<string | null>(null);
+  const [isOpen, setIsOpen]   = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
 
-  const handleConnect = () => {
-    setIsConnecting(true);
-    setTimeout(() => {
-      setIsConnecting(false);
-      setWalletAddress("0x7...f4ae");
-      setIsOpen(false);
-    }, 1500);
-  };
+  React.useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const loginButton = (
-    <Button asChild variant="secondary" size="sm" className="rounded-none border-2 px-6">
-      <Link href="/login">Login</Link>
-    </Button>
-  );
-
-  const walletButton = walletAddress ? (
-    <div className="flex items-center gap-2 px-4 h-9 bg-foreground/5 border-2 border-border rounded-none group cursor-default">
-      <div className="w-2 h-2 bg-green-500 rounded-full" />
-      <span className="text-[10px] font-black uppercase tracking-widest text-foreground">
-        {walletAddress}
-      </span>
-    </div>
-  ) : (
-    <Button 
-      size="sm" 
-      onClick={handleConnect}
-      isLoading={isConnecting}
-      className="rounded-none px-6 font-black uppercase tracking-tighter"
-    >
-      Connect
-    </Button>
-  );
+  const navLinks = [
+    { name: "Product", href: "#product" },
+    { name: "Developers", href: "#developers" },
+    { name: "Docs", href: "#docs" },
+    { name: "Whitepaper", href: "/whitepaper" },
+    { name: "Blog", href: "/blog" },
+  ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-12">
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-8 h-8 bg-foreground flex items-center justify-center group-hover:bg-accent transition-colors">
-                 <Shield className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-black tracking-tighter text-foreground uppercase pt-0.5">
-                Omen<span className="text-accent">.</span>
-              </span>
-            </Link>
-            <div className="hidden lg:flex gap-8">
-              {[
-                { name: "Dashboard", href: "/dashboard" },
-                { name: "Documentation", href: "/docs" },
-                { name: "Private Alpha", href: "/alpha" }
-              ].map((link) => (
+    <nav
+      className={[
+        "fixed top-0 z-50 w-full transition-all duration-300",
+        scrolled ? "py-4" : "py-6",
+      ].join(" ")}
+    >
+      <div className="max-container">
+        <div className={[
+          "flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300",
+          scrolled ? "glass-panel" : "bg-transparent",
+        ].join(" ")}>
+          
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group" aria-label="Omen home">
+            <div className="relative w-8 h-8 flex items-center justify-center">
+              <div className="absolute inset-0 border-[3px] border-[#2B5C92] rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-500" />
+              <div className="w-3 h-3 bg-gradient-to-tr from-[#0C1446] to-[#B3CDE0] rounded-sm" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-[#0B1220]">
+              Omen
+            </span>
+          </Link>
+
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => {
+              const isAnchor = link.href.startsWith("#");
+              return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-[10px] font-black uppercase tracking-[0.3em] text-subtext hover:text-foreground transition-all relative group"
+                  onClick={(e) => {
+                    if (isAnchor) {
+                      e.preventDefault();
+                      scrollToId(link.href.replace("#", ""));
+                      setIsOpen(false);
+                    }
+                  }}
+                  className="text-[15px] font-medium text-[#4A5568] hover:text-[#0E2F76] transition-colors duration-200"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
                 </Link>
-              ))}
-            </div>
+              );
+            })}
           </div>
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-4">
-              {loginButton}
-              {walletButton}
-            </div>
-            <button
-              className="lg:hidden p-2 text-foreground"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link href="/early-access" tabIndex={-1}>
+              <Button size="sm">
+                Request Early Access
+              </Button>
+            </Link>
           </div>
+
+          {/* Mobile toggle */}
+          <button
+            className="lg:hidden p-2 text-[#0B1220] rounded-md hover:bg-black/5 transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden overflow-hidden border-t border-border bg-background"
+            <motion.div
+              initial={{ height: 0, opacity: 0, y: -10 }}
+              animate={{ height: "auto", opacity: 1, y: 0 }}
+              exit={{ height: 0, opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="lg:hidden overflow-hidden glass-panel mt-4"
             >
-              <div className="flex flex-col gap-6 py-8 px-4">
-                {[
-                  { name: "Dashboard", href: "/dashboard" },
-                  { name: "Documentation", href: "/docs" },
-                  { name: "Private Alpha", href: "/alpha" }
-                ].map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-sm font-black uppercase tracking-[0.2em] text-subtext hover:text-foreground transition-colors"
-                  >
-                    {link.name}
+              <div className="flex flex-col gap-4 py-6 px-6">
+                {navLinks.map((link) => {
+                  const isAnchor = link.href.startsWith("#");
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => {
+                        if (isAnchor) {
+                          e.preventDefault();
+                          scrollToId(link.href.replace("#", ""));
+                        }
+                        setIsOpen(false);
+                      }}
+                      className="text-lg font-medium text-[#0B1220] hover:text-[#0E2F76] transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+                <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-[rgba(11,18,32,0.1)]">
+                  <Link href="/early-access" tabIndex={-1} onClick={() => setIsOpen(false)}>
+                    <Button className="w-full">
+                      Request Early Access
+                    </Button>
                   </Link>
-                ))}
-                <div className="flex flex-col gap-3 pt-6 border-t border-border">
-                  {loginButton}
-                  {walletButton}
                 </div>
               </div>
             </motion.div>

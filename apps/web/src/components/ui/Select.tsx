@@ -12,10 +12,10 @@ export interface SelectProps
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div className="relative">
+      <div className="relative group">
         <select
           className={cn(
-            "flex h-11 w-full appearance-none rounded-none border border-border bg-white px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus:border-accent/50 focus:ring-4 focus:ring-accent/10 disabled:cursor-not-allowed disabled:opacity-50 transition-all pr-8",
+            "flex h-12 w-full appearance-none rounded-none border border-border bg-surface px-4 py-2 text-sm text-foreground ring-offset-background focus-visible:outline-none focus:border-accent/40 focus:bg-white/[0.06] transition-all pr-10",
             className
           )}
           ref={ref}
@@ -23,7 +23,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         >
           {children}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-subtext">
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-subtext/40 group-focus-within:text-accent transition-colors">
           <svg
             className="h-4 w-4"
             fill="none"

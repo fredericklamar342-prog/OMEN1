@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +7,18 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Omen Protocol",
-  description: "White Canvas Protocol Implementation",
+  title: "Omen | Security Infrastructure",
+  description: "Enterprise-grade identity and threat intelligence for decentralized ecosystems.",
 };
+
+import { ToastProvider } from "@/context/ToastContext";
 
 export default function RootLayout({
   children,
@@ -18,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} font-inter antialiased min-h-screen bg-background text-foreground`}
+        className={`${inter.variable} ${spaceGrotesk.variable} font-inter antialiased min-h-screen bg-background text-foreground selection:bg-accent/30`}
       >
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
       </body>
     </html>
   );
