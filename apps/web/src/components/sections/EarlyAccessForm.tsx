@@ -15,7 +15,7 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
   const [status, setStatus]     = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage]   = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status === "submitting") return;
 
@@ -23,19 +23,18 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
     setMessage("");
 
     try {
-      const response = await fetch("/.netlify/functions/early-access", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ email, honeypot }),
+      const formData = new FormData(e.currentTarget);
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
       });
-
-      const data = await response.json();
 
       if (response.ok) {
         setStatus("success");
-        setMessage(data.message || "You're on the list. Check your inbox.");
+        setMessage("You're on the list. Check your inbox.");
       } else {
-        throw new Error(data.message || "Error joining. Try again.");
+        throw new Error("Error joining. Try again.");
       }
     } catch (err: any) {
       console.error("Waitlist Error:", err);
@@ -70,10 +69,19 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
 
   /* ── Form ──────────────────────────────────────────────────────── */
   return (
-    <form onSubmit={handleSubmit} className="relative w-full" noValidate>
+    <form 
+      name="early-access" 
+      method="POST" 
+      data-netlify="true" 
+      onSubmit={handleSubmit} 
+      className="relative w-full" 
+      noValidate
+    >
+      <input type="hidden" name="form-name" value="early-access" />
       {/* Honeypot — hidden from users */}
       <input
         type="text"
+        name="bot-field"
         className="hidden"
         value={honeypot}
         onChange={(e) => setHoneypot(e.target.value)}
@@ -88,6 +96,7 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
         <input
           id="waitlist-email"
           type="email"
+          name="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

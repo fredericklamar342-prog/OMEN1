@@ -3,9 +3,12 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
-import { ShieldCheck, Fingerprint, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Fingerprint, CheckCircle2, Droplet } from "lucide-react";
+import { useEarlyAccessModal } from "@/context/EarlyAccessModalContext";
 
 export function HeroSection() {
+  const { openModal } = useEarlyAccessModal();
+
   return (
     <section
       id="hero"
@@ -33,7 +36,7 @@ export function HeroSection() {
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: 2, delay: 1 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
                   className="h-full bg-gradient-to-r from-[#AAC0E1] to-[#0E2F76]" 
                 />
               </div>
@@ -48,11 +51,11 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 150 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+            transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
             className="absolute left-[12%] bottom-[10%] glass-card px-6 py-4 flex items-center gap-4 border-l-4 border-l-[#0E2F76] shadow-xl"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-[#0E2F76]/20 blur-lg rounded-full" />
+              <div className="absolute inset-0 bg-[#0E2F76]/20 blur-md md:blur-lg rounded-full" />
               <CheckCircle2 className="w-8 h-8 text-[#0E2F76] relative z-10" />
             </div>
             <div className="text-left">
@@ -62,46 +65,66 @@ export function HeroSection() {
           </motion.div>
         </div>
 
+        {/* Trust Indicator */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-black/5 mb-8"
+        >
+          <Droplet className="w-4 h-4 text-[#2B5C92] fill-[#2B5C92]/20" />
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#0E2F76]">
+            Native to Sui
+          </span>
+        </motion.div>
+
         {/* Headline */}
         <motion.h1
           id="hero-title"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-5xl lg:text-[72px] font-bold tracking-tight text-[#0B1220] leading-[1] max-w-[900px] mb-8"
+          transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
+          className="text-4xl md:text-5xl lg:text-[72px] font-bold tracking-tight text-[#0B1220] leading-[1] max-w-[1000px] mb-8"
         >
-          Know Who Built <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#0B1220] via-[#0E2F76] to-[#AAC0E1]">the Protocol</span>
+          Programmable Trust <br className="hidden md:block" />
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#0B1220] via-[#0E2F76] to-[#AAC0E1]">for the Sui Economy</span>
         </motion.h1>
 
         {/* Sub-headline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          className="text-lg md:text-xl text-[#4A5568] max-w-[700px] mb-12 leading-relaxed"
+          transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+          className="text-xl text-[#0B1220] max-w-[800px] mb-6 leading-relaxed font-medium"
         >
-          In Web3 you can verify code, but you cannot verify who built it. <br className="hidden md:block" />
-          Omen helps verify the real builders behind Web3 projects.
+          Omen Labs is a Sui-native trust and reputation layer that helps users, wallets, and applications verify the builders behind protocols, contracts, and AI agents without sacrificing privacy.
+        </motion.p>
+
+        {/* Supporting line */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+          className="text-lg text-[#4A5568] max-w-[700px] mb-12 leading-relaxed"
+        >
+          In Web3 you can verify code, but you cannot verify who built it. Omen Labs creates a permanent, non-transferable reputation layer for builders on Sui.
         </motion.p>
 
         {/* Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
           className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto"
         >
-          <Link href="/early-access" className="w-full sm:w-auto text-center" tabIndex={-1}>
-            <Button variant="secondary" size="lg" className="w-full sm:w-auto px-10 glass-panel">
-              Request Early Access
-            </Button>
-          </Link>
+          <Button variant="secondary" size="lg" className="w-full sm:w-auto px-10 glass-panel" onClick={openModal}>
+            Request Early Access
+          </Button>
         </motion.div>
 
         {/* Decorative elements */}
         <div className="mt-32 relative w-full max-w-[1000px] flex items-center justify-center">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[300px] bg-gradient-to-r from-transparent via-[#AAC0E1]/10 to-transparent -rotate-12 blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[300px] bg-gradient-to-r from-transparent via-[#AAC0E1]/10 to-transparent -rotate-12 blur-xl md:blur-3xl" />
           <div className="relative z-10 w-full h-px bg-gradient-to-r from-transparent via-[#0E2F76]/20 to-transparent" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#0E2F76]/40 blur-sm" />
         </div>

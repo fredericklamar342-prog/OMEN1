@@ -26,25 +26,25 @@ export function BenefitsGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="animate-fade-up stagger-1">
             <FeatureCard 
-              title="Stay Private, Stay Verified" 
+              title="Verify Without Doxxing" 
               subtitle="For Builders" 
-              description="You can prove who you are without revealing your real name. Connect your GitHub or X account, and Omen quietly verifies your identity. No personal data is stored."
+              description="Use zkLogin to link your GitHub or X reputation to your on-chain identity without exposing your wallet."
               icon={UserCheck}
             />
           </div>
           <div className="animate-fade-up stagger-2">
             <FeatureCard 
-              title="Show Users You Are Real" 
+              title="Reputation That Cannot Be Sold" 
               subtitle="For Projects" 
-              description="Earn a Verified badge for your project. Users can see it and know: this is a real person behind this project, not a scammer. Trust becomes your biggest advantage."
+              description="Receive a Soulbound Omen Badge that cannot be bought, sold, or transferred. Your reputation stays tied to your work."
               icon={ShieldCheck}
             />
           </div>
           <div className="animate-fade-up stagger-3">
             <FeatureCard 
-              title="Add Verification in Minutes" 
+              title="Turn Trust Into Infrastructure" 
               subtitle="For Developers" 
-              description="Use the Omen SDK to plug trust signals into your app. It only takes a few lines of code. No complicated setup required."
+              description="Integrate the Omen SDK so wallets and apps can detect verified or suspicious entities before users approve transactions."
               icon={Zap}
             />
           </div>

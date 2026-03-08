@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { scrollToId } from "@/utils/scroll";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useRef } from "react";
+import { useEarlyAccessModal } from "@/context/EarlyAccessModalContext";
 
 /* ── Animated stat item ──────────────────────────────────────────────────── */
 interface StatItemProps {
@@ -22,7 +23,7 @@ interface StatItemProps {
 }
 
 function AnimatedStat({ label, numericEnd, prefix = "", suffix = "", decimals = 0, delay = 0 }: StatItemProps) {
-  const [ref, count] = useCountUp({ end: numericEnd, duration: 900, delay: delay * 1000, decimals });
+  const [ref, count] = useCountUp({ end: numericEnd, duration: 400, delay: delay * 1000, decimals });
 
   return (
     <div className="space-y-4 group" ref={ref as React.RefObject<HTMLDivElement>}>
@@ -35,7 +36,7 @@ function AnimatedStat({ label, numericEnd, prefix = "", suffix = "", decimals = 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay, ease: "easeOut" }}
+          transition={{ duration: 0.4, delay, ease: "easeOut" }}
           style={{ transformOrigin: "left center" }}
         />
       </div>
@@ -48,6 +49,8 @@ function AnimatedStat({ label, numericEnd, prefix = "", suffix = "", decimals = 
 
 /* ── Main component ──────────────────────────────────────────────────────── */
 export function MetricsBar() {
+  const { openModal } = useEarlyAccessModal();
+
   return (
     <section className="py-24 bg-transparent relative z-10 w-full">
       <div className="max-container">
@@ -76,7 +79,7 @@ export function MetricsBar() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 relative z-10">
-            <Button size="lg" className="px-12" onClick={() => scrollToId("early-access")}>
+            <Button size="lg" className="px-12" onClick={openModal}>
               Get Early Access
             </Button>
             <Button variant="secondary" size="lg" className="px-12">

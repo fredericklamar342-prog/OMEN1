@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -7,10 +7,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["600", "700", "800"], // Headlines
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400"], // Code/wallet text
 });
 
 export const metadata: Metadata = {
@@ -19,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 import { ToastProvider } from "@/context/ToastContext";
+import { EarlyAccessModalProvider } from "@/context/EarlyAccessModalContext";
 
 export default function RootLayout({
   children,
@@ -28,11 +35,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} font-inter antialiased min-h-screen bg-background text-foreground selection:bg-accent/30`}
+        className={`${inter.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} font-inter antialiased min-h-screen bg-background text-foreground selection:bg-accent/30`}
       >
-        <ToastProvider>
-          {children}
-        </ToastProvider>
+        <EarlyAccessModalProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </EarlyAccessModalProvider>
       </body>
     </html>
   );

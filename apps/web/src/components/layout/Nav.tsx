@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollToId } from "@/utils/scroll";
+import { useEarlyAccessModal } from "@/context/EarlyAccessModalContext";
 
 export function Nav() {
   const [isOpen, setIsOpen]   = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const { openModal } = useEarlyAccessModal();
 
   React.useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -18,9 +20,9 @@ export function Nav() {
   }, []);
 
   const navLinks = [
-    { name: "Product", href: "#product" },
-    { name: "Developers", href: "#developers" },
-    { name: "Docs", href: "#docs" },
+    { name: "Product", href: "/product" },
+    { name: "Developers", href: "/developer" },
+    { name: "Docs", href: "/docs" },
     { name: "Whitepaper", href: "/whitepaper" },
     { name: "Blog", href: "/blog" },
   ];
@@ -41,10 +43,10 @@ export function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group" aria-label="Omen home">
             <div className="relative w-8 h-8 flex items-center justify-center">
-              <div className="absolute inset-0 border-[3px] border-[#2B5C92] rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-500" />
+              <div className="absolute inset-0 border-[3px] border-[#2B5C92] rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-200" />
               <div className="w-3 h-3 bg-gradient-to-tr from-[#0C1446] to-[#B3CDE0] rounded-sm" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-[#0B1220]">
+            <span className="text-xl font-bold font-plus-jakarta tracking-tight text-[#0B1220]">
               Omen
             </span>
           </Link>
@@ -74,11 +76,9 @@ export function Nav() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/early-access" tabIndex={-1}>
-              <Button size="sm">
-                Request Early Access
-              </Button>
-            </Link>
+            <Button size="sm" onClick={openModal}>
+              Request Early Access
+            </Button>
           </div>
 
           {/* Mobile toggle */}
@@ -122,11 +122,15 @@ export function Nav() {
                   );
                 })}
                 <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-[rgba(11,18,32,0.1)]">
-                  <Link href="/early-access" tabIndex={-1} onClick={() => setIsOpen(false)}>
-                    <Button className="w-full">
-                      Request Early Access
-                    </Button>
-                  </Link>
+                  <Button 
+                    className="w-full" 
+                    onClick={() => {
+                      setIsOpen(false);
+                      openModal();
+                    }}
+                  >
+                    Request Early Access
+                  </Button>
                 </div>
               </div>
             </motion.div>

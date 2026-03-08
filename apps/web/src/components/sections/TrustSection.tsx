@@ -42,7 +42,7 @@ export function TrustSection() {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: "easeOut" }}
+                  transition={{ delay: i * 0.05, duration: 0.3, ease: "easeOut" }}
                   className="flex items-center gap-2.5"
                 >
                   <div className="w-1.5 h-1.5 bg-[#2B5C92] rounded-full" />
@@ -79,7 +79,7 @@ export function TrustSection() {
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
-                className="absolute glass-panel p-5 md:p-6 flex flex-col items-center gap-3 backdrop-blur-md border border-white/50 shadow-xl group cursor-pointer hover:bg-white/40 transition-colors"
+                className="absolute glass-panel p-4 md:p-6 flex flex-col items-center gap-3 md:backdrop-blur-md border border-white/50 shadow-xl group cursor-pointer hover:bg-white/40 transition-colors"
                 style={{ left: `calc(50% + ${p.x})`, top: `calc(50% + ${p.y})` }}
               >
                 <div className="w-10 h-10 border border-[#2B5C92]/10 flex items-center justify-center p-2 rounded-xl group-hover:scale-110 group-hover:bg-[#2B5C92]/5 transition-all duration-500">
@@ -90,12 +90,12 @@ export function TrustSection() {
                 </span>
                 
                 {/* Connecting light (visual only) */}
-                <div className="absolute -z-10 w-24 h-24 bg-[#AAC0E1]/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -z-10 w-24 h-24 bg-[#AAC0E1]/10 blur-xl md:blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.div>
             ))}
 
             {/* Background Glow */}
-            <div className="absolute w-64 h-64 bg-[#AAC0E1]/15 blur-[100px] rounded-full -z-10" />
+            <div className="absolute w-64 h-64 bg-[#AAC0E1]/15 blur-3xl md:blur-[100px] rounded-full -z-10" />
           </div>
 
         </div>

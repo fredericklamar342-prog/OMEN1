@@ -19,7 +19,7 @@ export function Layout({ children }: LayoutProps) {
         <div className="max-container flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3 group">
             <div className="relative w-6 h-6 flex items-center justify-center">
-              <div className="absolute inset-0 border-[2px] border-[#0E2F76] rounded-md rotate-45 group-hover:rotate-90 transition-transform duration-500" />
+              <div className="absolute inset-0 border-[2px] border-[#0E2F76] rounded-md rotate-45 group-hover:rotate-90 transition-transform duration-200" />
               <div className="w-2 h-2 bg-[#AAC0E1] rounded-[1px]" />
             </div>
             <span className="font-bold tracking-tight text-[#0B1220]">
