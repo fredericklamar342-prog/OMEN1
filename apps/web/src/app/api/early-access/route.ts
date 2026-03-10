@@ -1,73 +1,120 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const fromEmail = process.env.FROM_EMAIL || "OmenLabs <no-reply@omenlabs.com>";
+const fromEmail = process.env.FROM_EMAIL || "Omen <no-reply@omenlabs.com>";
 const adminEmail = process.env.ADMIN_EMAIL || "admin@omenlabs.com";
 
+type EarlyAccessPayload = {
+  email?: string;
+  project?: string;
+  wallet?: string;
+  source?: string;
+};
+
+type EmailTaskResult =
+  | { success: true }
+  | { success: false; reason: unknown };
 
 export async function POST(req: Request) {
   try {
+    const data = (await req.json()) as EarlyAccessPayload;
+    const { email, project, wallet } = data;
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email || !emailRegex.test(email)) {
+      return NextResponse.json(
+        { success: false, error: "Please provide a valid email address." },
+        { status: 400 }
+      );
+    }
+
     if (!process.env.RESEND_API_KEY) {
-      console.warn("RESEND_API_KEY is not defined. Email will not be sent.");
-    }
-    const resend = new Resend(process.env.RESEND_API_KEY || "missing_key_for_build");
+      console.warn("RESEND_API_KEY is missing. Operating in simulation mode.");
+      if (process.env.NODE_ENV === "development") {
+        return NextResponse.json(
+          {
+            success: true,
+            message: "Registration received in development mode. Configure Resend to send confirmation emails.",
+          },
+          { status: 200 }
+        );
+      }
 
-    const data = await req.json();
-    const email = data.email;
-    const honeypot = data["bot-field"];
-
-    // 1. Honeypot check
-    if (honeypot) {
-      console.warn("Honeypot filled, blocking spam.");
-      return NextResponse.json({ message: "Success (spambot trapped)" }, { status: 200 });
-    }
-
-    // 2. Validation
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ message: "Invalid email address" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Email delivery is not configured on the server." },
+        { status: 503 }
+      );
     }
 
-    // 3. Send Confirmation to User
-    await resend.emails.send({
-      from: fromEmail,
-      to: email,
-      subject: "You’re on the OmenLabs Early Access list",
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-          <h1 style="color: #B11226; text-transform: uppercase; letter-spacing: 2px;">OmenLabs Verified</h1>
-          <p>Handshake established. We've added your identity to the Omen Protocol waitlist.</p>
-          <p>You'll be among the first to access our programmable security infrastructure.</p>
-          <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 5px;">
-            <p><strong>Status:</strong> Priority Queue Active</p>
-            <p><strong>Identity:</strong> ${email}</p>
-          </div>
-          <p style="margin-top: 30px;">
-            <a href="https://omenlabs.xyz/login" style="background: #B11226; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; text-transform: uppercase; font-size: 12px;">Access Terminal</a>
-          </p>
-          <hr style="margin-top: 40px; border: 0; border-top: 1px solid #eee;" />
-          <p style="font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px;">OmenLabs Network. Secure Infrastructure Protocol.</p>
-        </div>
-      `,
-    });
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
-    // 4. Send Notification to Admin
-    await resend.emails.send({
-      from: fromEmail,
-      to: adminEmail,
-      subject: "New OmenLabs Early Access Signup",
-      html: `
-        <div style="font-family: sans-serif;">
-          <h2>New Signup Detected</h2>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-          <p><strong>System Status:</strong> Handshake Success</p>
-        </div>
-      `,
-    });
+    const [userResult, adminResult]: EmailTaskResult[] = await Promise.all([
+      resend.emails
+        .send({
+          from: fromEmail,
+          to: email,
+          subject: "You are registered for Omen early access",
+          html: `
+            <div style="font-family: sans-serif; color: #0B1220; max-width: 600px; margin: 0 auto;">
+              <h2 style="margin-bottom: 12px;">Registration confirmed</h2>
+              <p>Thank you for requesting early access to Omen.</p>
+              <p>We have registered <strong>${email}</strong> and queued your request for review.</p>
+              <div style="margin: 20px 0; padding: 15px; border-left: 4px solid #2B5C92; background: #f8fafc;">
+                <strong>Project:</strong> ${project || "Individual"}<br/>
+                <strong>Wallet:</strong> ${wallet || "Not provided"}<br/>
+                <strong>Status:</strong> Pending Approval
+              </div>
+              <p>You will hear from the Omen team when your batch is scheduled for onboarding.</p>
+              <p>Best regards,<br/>The Omen Team</p>
+            </div>
+          `,
+        })
+        .then((result) =>
+          result.error ? { success: false, reason: result.error } : { success: true }
+        )
+        .catch((reason: unknown) => ({ success: false, reason })),
+      resend.emails
+        .send({
+          from: fromEmail,
+          to: adminEmail,
+          subject: `New Waitlist Entry: ${project || email}`,
+          html: `
+            <p>New signup: <b>${email}</b></p>
+            <p>Project: ${project || "N/A"}</p>
+            <p>Wallet: ${wallet || "N/A"}</p>
+            <p>Source: ${data.source || "unknown"}</p>
+          `,
+        })
+        .then((result) =>
+          result.error ? { success: false, reason: result.error } : { success: true }
+        )
+        .catch((reason: unknown) => ({ success: false, reason })),
+    ]);
 
-    return NextResponse.json({ message: "You’re on the waitlist ✅ Check your inbox" }, { status: 200 });
-  } catch (error: any) {
-    console.error("Email Sender Error:", error);
-    return NextResponse.json({ message: "System error, please try again later." }, { status: 500 });
+    if (!userResult.success) {
+      console.error("Confirmation email failed:", userResult.reason);
+      return NextResponse.json(
+        { success: false, error: "We could not send the confirmation email. Please try again shortly." },
+        { status: 502 }
+      );
+    }
+
+    if (!adminResult.success) {
+      console.error("Admin notification failed:", adminResult.reason);
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "You are registered. A confirmation email has been sent to your inbox.",
+      },
+      { status: 200 }
+    );
+  } catch (error: unknown) {
+    console.error("Critical API Error:", error);
+    return NextResponse.json(
+      { success: false, error: "Internal server error. Please try again later." },
+      { status: 500 }
+    );
   }
 }
