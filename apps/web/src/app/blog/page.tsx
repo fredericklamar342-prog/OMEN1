@@ -1,5 +1,4 @@
 import { Layout } from "@/components/layout/Layout";
-import { PageHeader } from "@/components/layout/PageHeader";
 import { BookOpen, Sparkles, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";

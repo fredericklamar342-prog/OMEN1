@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, FileText, MailCheck, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { submitEarlyAccessRegistration } from "@/utils/emailjs";
 
 interface EarlyAccessModalProps {
   isOpen: boolean;
@@ -34,30 +35,19 @@ export function EarlyAccessModal({ isOpen, onClose }: EarlyAccessModalProps) {
 
     const formData = new FormData(e.currentTarget);
     const data = {
-      email: formData.get("email"),
-      project: formData.get("project"),
-      wallet: formData.get("wallet"),
+      email: String(formData.get("email") || ""),
+      project: String(formData.get("project") || ""),
+      wallet: String(formData.get("wallet") || ""),
       source: "modal",
     };
 
     try {
-      const response = await fetch("/api/early-access", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = (await response.json()) as { message?: string; error?: string };
-
-      if (response.ok) {
-        setMessage(result.message || "You are on the list. Check your inbox for confirmation.");
-        setIsSuccess(true);
-      } else {
-        setError(result.error || result.message || "Unable to submit right now.");
-      }
+      const result = await submitEarlyAccessRegistration(data);
+      setMessage(result.message || "You are on the list. Check your inbox for confirmation.");
+      setIsSuccess(true);
     } catch (error: unknown) {
       console.error("Form submission error:", error);
-      setError("Something went wrong. Please try again.");
+      setError(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, CheckCircle2, MailCheck, Shield, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { submitEarlyAccessRegistration } from "@/utils/emailjs";
 
 type SubmitState = {
   status: "idle" | "submitting" | "success" | "error";
@@ -29,27 +30,17 @@ export default function EarlyAccessPage() {
     setSubmitState({ status: "submitting", message: "" });
 
     try {
-      const response = await fetch("/api/early-access", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.get("email"),
-          project: formData.get("project"),
-          wallet: formData.get("wallet"),
-          source: "early-access-page",
-        }),
+      const result = await submitEarlyAccessRegistration({
+        email: String(formData.get("email") || ""),
+        project: String(formData.get("project") || ""),
+        wallet: String(formData.get("wallet") || ""),
+        source: "early-access-page",
       });
-
-      const data = (await response.json()) as { message?: string; error?: string };
-
-      if (!response.ok) {
-        throw new Error(data.error || "Unable to submit your request right now.");
-      }
 
       form.reset();
       setSubmitState({
         status: "success",
-        message: data.message || "Your registration is complete and a confirmation email has been sent.",
+        message: result.message,
       });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
@@ -206,8 +197,8 @@ export default function EarlyAccessPage() {
                   </div>
 
                   <div className="rounded-2xl border border-[#0E2F76]/8 bg-[#F8FBFE] px-4 py-4 text-sm text-[#4A5568]">
-                    You will see an in-app success state immediately. Email delivery depends on `RESEND_API_KEY`,
-                    `FROM_EMAIL`, and a verified sending domain being configured on the server.
+                    You will see an in-app success state immediately. Email delivery depends on your EmailJS
+                    service ID, public key, and template IDs being configured in the environment.
                   </div>
 
                   <AnimatePresence>
