@@ -11,20 +11,31 @@ export default function DeveloperPage() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString()
-    })
-      .then(() => setIsSuccess(true))
-      .catch((error) => console.error("Form submission error:", error))
-      .finally(() => setIsLoading(false));
+    try {
+      const response = await fetch("/api/developer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        const errorData = await response.json();
+        console.error("Submission error:", errorData.error || errorData.message);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -61,13 +72,9 @@ export default function DeveloperPage() {
                     </div>
 
                     <form 
-                      name="developer-beta" 
-                      method="POST" 
-                      data-netlify="true" 
                       onSubmit={handleSubmit} 
                       className="w-full space-y-5"
                     >
-                      <input type="hidden" name="form-name" value="developer-beta" />
                       
                       <div className="space-y-1.5">
                         <label className="text-[11px] font-bold uppercase tracking-widest text-[#5B6B82]">

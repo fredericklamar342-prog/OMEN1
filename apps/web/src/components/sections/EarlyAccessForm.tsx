@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle } from "lucide-react";
 
 interface EarlyAccessFormProps {
   layout?: "hero" | "bottom";
@@ -14,8 +13,8 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
-  const validateEmail = (email: string) => {
-    return String(email)
+  const validateEmail = (value: string) => {
+    return String(value)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -42,86 +41,64 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
     setMessage("");
 
     try {
-      const formData = new FormData(e.currentTarget);
-      const response = await fetch("/", {
+      const res = await fetch("/api/early-access", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          source: `inline-${layout}`,
+        }),
       });
 
-      if (response.ok) {
-        setStatus("success");
-        setEmail(""); // clean input on success
-      } else {
-        throw new Error("Unable to submit. Please try again later.");
+      const data = (await res.json()) as { error?: string; message?: string };
+
+      if (!res.ok) {
+        throw new Error(data.error || "Unable to submit. Please try again later.");
       }
-    } catch (err: any) {
-      console.error("Netlify Form Error:", err);
+
+      setStatus("success");
+      setMessage(data.message || "Your request is in. Check your inbox for confirmation.");
+      setEmail("");
+    } catch (err: unknown) {
+      console.error("Form Error:", err);
       setStatus("error");
-      setMessage(err.message || "Something went wrong. Please try again.");
+      setMessage(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }
   };
 
-  /* ── Success state ─────────────────────────────────────────────── */
   if (status === "success") {
     return (
-      <div className="flex justify-center items-center py-10 w-full">
-        <motion.div 
+      <div className="flex w-full items-center justify-center py-8 sm:py-10">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative max-w-xl w-full rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.35)] p-10 text-center"
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="relative w-full max-w-xl rounded-3xl border border-white/20 bg-white/10 p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-10"
         >
-          {/* glow border */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-30 blur-xl pointer-events-none"></div>
+          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-30 blur-xl" />
 
-          {/* icon */}
-          <div className="relative flex justify-center mb-6">
-            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg animate-pulse">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+          <div className="relative mb-6 flex justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+              <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
           </div>
 
-          {/* headline */}
-          <h2 className="text-3xl font-semibold text-white tracking-tight">
-            You’re on the list
-          </h2>
-
-          {/* description */}
-          <p className="text-white/70 mt-3 text-lg">
-            Early access updates will reach your inbox first.
-          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-white">You&apos;re on the list</h2>
+          <p className="mt-3 text-base text-white/75 sm:text-lg">{message}</p>
         </motion.div>
       </div>
     );
   }
 
-  /* ── Form ──────────────────────────────────────────────────────── */
   return (
-    <form 
-      name="early-access" 
-      method="POST" 
-      data-netlify="true" 
-      onSubmit={handleSubmit} 
-      className="relative w-full" 
+    <form
+      onSubmit={handleSubmit}
+      className={["relative w-full", layout === "bottom" ? "max-w-2xl" : ""].join(" ")}
       noValidate
     >
-      <input type="hidden" name="form-name" value="early-access" />
-      
-      {/* Honeypot — completely hidden from users, Netlify standard is typically bot-field */}
-      <input
-        type="text"
-        name="bot-field"
-        className="hidden"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-      />
-
-      <div className="flex flex-col md:flex-row gap-2">
-        {/* Email Input */}
+      <div className="flex flex-col gap-3 md:flex-row">
         <input
           id="waitlist-email"
           type="email"
@@ -129,8 +106,8 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => {
-             setEmail(e.target.value);
-             if (status === "error") setStatus("idle");
+            setEmail(e.target.value);
+            if (status === "error") setStatus("idle");
           }}
           required
           disabled={status === "submitting"}
@@ -141,18 +118,16 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
           aria-label="Email address"
         />
 
-        {/* Submit */}
         <Button
           type="submit"
           isLoading={status === "submitting"}
           size="lg"
-          className="shrink-0 md:w-auto w-full"
+          className="w-full shrink-0 md:w-auto"
         >
-          {status === "submitting" ? "Joining…" : "Request Access"}
+          {status === "submitting" ? "Joining..." : "Request Access"}
         </Button>
       </div>
 
-      {/* Inline Validation / Error Message */}
       <AnimatePresence>
         {status === "error" && (
           <motion.p
@@ -169,11 +144,10 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
         )}
       </AnimatePresence>
 
-      {/* SDK Documentation — secondary text link */}
       <div className="mt-4 flex items-center gap-4 px-1">
         <a
           href="/docs"
-          className="text-[11px] font-semibold uppercase tracking-widest text-[#5B6B82] hover:text-[#2B5C92] transition-colors duration-200 underline decoration-black/10 underline-offset-4 hover:decoration-[#2B5C92]/40"
+          className="text-[11px] font-semibold uppercase tracking-widest text-[#5B6B82] underline decoration-black/10 underline-offset-4 transition-colors duration-200 hover:text-[#2B5C92] hover:decoration-[#2B5C92]/40"
         >
           SDK Documentation
         </a>

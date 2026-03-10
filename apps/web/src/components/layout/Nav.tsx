@@ -21,10 +21,10 @@ export function Nav() {
 
   const navLinks = [
     { name: "Product", href: "/product" },
+    { name: "Dashboard", href: "/dashboard" },
     { name: "Developers", href: "/developer" },
     { name: "Docs", href: "/docs" },
     { name: "Whitepaper", href: "/whitepaper" },
-    { name: "Blog", href: "/blog" },
   ];
 
   return (
