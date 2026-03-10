@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { submitEarlyAccessRegistration } from "@/utils/emailjs";
 
 interface EarlyAccessFormProps {
   layout?: "hero" | "bottom";
@@ -41,23 +42,13 @@ export function EarlyAccessForm({ layout = "hero" }: EarlyAccessFormProps) {
     setMessage("");
 
     try {
-      const res = await fetch("/api/early-access", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          source: `inline-${layout}`,
-        }),
+      const result = await submitEarlyAccessRegistration({
+        email,
+        source: `inline-${layout}`,
       });
 
-      const data = (await res.json()) as { error?: string; message?: string };
-
-      if (!res.ok) {
-        throw new Error(data.error || "Unable to submit. Please try again later.");
-      }
-
       setStatus("success");
-      setMessage(data.message || "Your request is in. Check your inbox for confirmation.");
+      setMessage(result.message || "Your request is in. Check your inbox for confirmation.");
       setEmail("");
     } catch (err: unknown) {
       console.error("Form Error:", err);
