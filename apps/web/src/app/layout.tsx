@@ -20,8 +20,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Omen | Trust Architecture for AI & Web3",
-  description: "Programmable security primitives, identity graphs, and real-time reputation for the decentralized intelligence era.",
+  title: "Omen | Security Infrastructure",
+  description: "Enterprise-grade identity and threat intelligence for decentralized ecosystems.",
 };
 
 import { ToastProvider } from "@/context/ToastContext";
@@ -33,9 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} font-inter antialiased min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground`}
+        className={`${inter.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} font-inter antialiased min-h-screen bg-background text-foreground selection:bg-accent/30`}
       >
         <EarlyAccessModalProvider>
           <ToastProvider>
@@ -46,4 +46,3 @@ export default function RootLayout({
     </html>
   );
 }
-

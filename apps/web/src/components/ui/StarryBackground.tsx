@@ -49,4 +49,3 @@ export function StarryBackground() {
     </div>
   );
 }
-
