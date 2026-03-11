@@ -81,43 +81,39 @@ export function HeroSection() {
         {/* Headline */}
         <motion.h1
           id="hero-title"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
-          className="text-4xl md:text-5xl lg:text-[72px] font-bold tracking-tight text-[#0B1220] leading-[1] max-w-[1000px] mb-8"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="text-4xl md:text-5xl lg:text-[72px] font-black tracking-tight text-[#0B1220] leading-[1] max-w-[1100px] mb-8 uppercase"
         >
-          Programmable Trust <br className="hidden md:block" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#0B1220] via-[#43B6D5] to-[#AAC0E1]">for the Sui Economy</span>
+          Trust the <span className="text-gradient">Builders</span> <br className="hidden md:block" />
+          Before You Trust the Code.
         </motion.h1>
 
         {/* Sub-headline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
-          className="text-xl text-[#0B1220] max-w-[800px] mb-6 leading-relaxed font-medium"
+          className="text-xl md:text-2xl text-[#0B1220] max-w-[900px] mb-8 leading-relaxed font-bold border-l-4 border-[#43B6D5] pl-6"
         >
-          Omen Labs is a Sui-native trust and reputation layer that helps users, wallets, and applications verify the builders behind protocols, contracts, and AI agents without sacrificing privacy.
-        </motion.p>
-
-        {/* Supporting line */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          className="text-lg text-[#4A5568] max-w-[700px] mb-12 leading-relaxed"
-        >
-          In Web3 you can verify code, but you cannot verify who built it. Omen Labs creates a permanent, non-transferable reputation layer for builders on Sui.
+          Web3 lets you verify smart contracts but cannot verify who built them. Omen creates the trust layer for the Sui ecosystem so wallets, protocols, and AI agents can verify builder reputation before interacting with contracts.
         </motion.p>
 
         {/* Action Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto mt-4"
         >
-          <Button variant="secondary" size="lg" className="w-full sm:w-auto px-10 glass-panel" onClick={openModal}>
+          <Button size="lg" className="w-full sm:w-auto px-10 bg-[#43B6D5] text-white hover:bg-[#3AA0BD] border-none shadow-[0_10px_20px_-10px_rgba(67,182,213,0.5)]" asChild>
+            <Link href="/docs">View Docs</Link>
+          </Button>
+          <Button variant="secondary" size="lg" className="w-full sm:w-auto px-10 glass-panel" asChild>
+            <Link href="/whitepaper">Read Whitepaper</Link>
+          </Button>
+          <Button variant="secondary" size="lg" className="w-full sm:w-auto px-10 border-[#43B6D5] text-[#43B6D5] bg-transparent hover:bg-[#43B6D5]/5 shadow-none" onClick={openModal}>
             Request Early Access
           </Button>
         </motion.div>

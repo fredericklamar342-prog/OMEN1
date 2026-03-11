@@ -1,28 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cpu, Fingerprint, Layers, Activity } from "lucide-react";
+import { Cpu, Server, Zap, Globe, Database, Shield } from "lucide-react";
 
 const items = [
   {
-    title:       "Step 1: Join the Waitlist",
-    description: "Start by joining our private alpha waitlist. We will notify you as soon as identity verification is ready.",
-    icon:        Cpu,
+    title:       "Seek (Read)",
+    description: "The OmenRegistry operates as a Shared Object. Integrators query verification status and Risk Scores in a single transaction block with O(1) complexity.",
+    icon:        Zap,
   },
   {
-    title:       "Step 2: Verify Your Identity",
-    description: "Link your GitHub or X (Twitter) account. Omen confirms you are a real person — without storing your personal data.",
-    icon:        Fingerprint,
+    title:       "Remit (Write)",
+    description: "Security tools push audit results to Omen. These results permanently alter the developer's dynamic Risk Score, turning tools into ecosystem anchors.",
+    icon:        Database,
   },
   {
-    title:       "Step 3: Get Your Verified Badge",
-    description: "Once verified, you receive a secure Omen Badge. It appears on your profile and shows users that a real, confirmed person is behind it.",
-    icon:        Layers,
+    title:       "Walrus Anchoring",
+    description: "Heavy AI audit data is stored on Walrus. Only the 256-bit hash and Blob ID live on-chain, keeping Sui gas fees near absolute zero.",
+    icon:        Server,
   },
   {
-    title:       "Step 4: Users Can Trust You",
-    description: "Your community can now see your badge and feel safe. No more guessing — they know exactly who built the project.",
-    icon:        Activity,
+    title:       "AI Oracle (MCP)",
+    description: "An MCP Server exposes our data to the Agentic Web. Autonomous bots run machine-to-machine risk assessments before executing trades.",
+    icon:        Globe,
   },
 ];
 
@@ -36,15 +36,15 @@ export function ArchitectureSection() {
         {/* Header */}
         <div className="flex flex-col mb-16 items-center text-center animate-fade-up">
           <span className="text-[11px] font-bold tracking-widest text-[#43B6D5] uppercase mb-4">
-            How Omen Works
+            System Architecture
           </span>
           <h2
             id="arch-title"
             className="text-3xl md:text-5xl font-bold tracking-tight text-[#0B1220] mb-6"
           >
-            4 Simple Steps to <br />Get Verified.
+            The "Seek and Remit" <br />Trust Primitive.
           </h2>
-          <div className="h-[2px] w-16 bg-gradient-to-r from-[#2A8FA8] to-[#B3CDE0] rounded-full" />
+          <div className="h-[2px] w-16 bg-gradient-to-r from-[#2A8FA8] to-[#43B6D5] rounded-full" />
         </div>
 
         {/* Grid */}
@@ -52,12 +52,12 @@ export function ArchitectureSection() {
           {items.map((item, i) => (
             <div
               key={i}
-              className="group relative glass-card p-10 hover:shadow-lg transition-all duration-300 rounded-[22px] overflow-hidden"
+              className="group relative glass-card p-10 hover:shadow-lg transition-all duration-300 rounded-[22px] overflow-hidden bg-white/50 backdrop-blur-sm border border-black/5"
               style={{ animationDelay: `${i * 100}ms` }}
             >
               <div className="flex flex-col gap-5 relative z-10 animate-fade-up">
                 {/* Icon */}
-                <div className="w-12 h-12 flex items-center justify-center border border-[#2A8FA8]/20 bg-gradient-to-tr from-[#2A8FA8]/5 to-[#B3CDE0]/5 transition-colors duration-300 rounded-xl group-hover:scale-110">
+                <div className="w-12 h-12 flex items-center justify-center border border-[#43B6D5]/20 bg-gradient-to-tr from-[#43B6D5]/5 to-[#B3CDE0]/5 transition-colors duration-300 rounded-xl group-hover:scale-110">
                   <item.icon className="w-6 h-6 text-[#43B6D5] transition-colors duration-200" />
                 </div>
 

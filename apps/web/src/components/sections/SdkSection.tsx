@@ -25,30 +25,30 @@ export function SdkSection() {
             </div>
             
             <div className="space-y-6 animate-fade-up stagger-2">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#0B1220]">Simple to build. <br />Easy to trust.</h2>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#0B1220] uppercase">Simple to <span className="text-gradient">Integrate.</span></h2>
               <p className="text-lg text-[#4A5568] leading-relaxed max-w-lg">
-                Add Omen verification to your project in minutes. Your users will instantly see whether a builder is verified — before they interact with them.
+                Apps, wallets, and AI agents can integrate Omen to verify protocol safety before transactions execute. It only takes a few lines of code to add a trust check.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 animate-fade-up stagger-3">
               {[
-                { label: "Runs Before Sign", val: "Pre-Tx" },
-                { label: "Verification", val: "Identity Check" },
-                { label: "Speed", val: "Near Instant" },
-                { label: "Accuracy", val: "99.99%" }
+                { label: "AI Oracle", val: "MCP Server" },
+                { label: "Execution", val: "Move PTBs" },
+                { label: "Storage", val: "Walrus Protocol" },
+                { label: "Performance", val: "O(1) Lookup" }
               ].map((stat, i) => (
                 <div key={i} className="space-y-1">
                   <div className="text-[11px] font-bold uppercase tracking-widest text-[#4A5568]">{stat.label}</div>
-                  <div className="text-xl font-bold text-[#0B1220]">{stat.val}</div>
+                  <div className="text-xl font-bold text-[#43B6D5]">{stat.val}</div>
                 </div>
               ))}
             </div>
 
             <div className="animate-fade-up stagger-4 pt-4">
-              <Button size="lg" className="group px-8" asChild>
+              <Button size="lg" className="group px-8 bg-[#43B6D5] hover:bg-[#3AA0BD] text-white border-none shadow-[0_10px_20px_-10px_rgba(67,182,213,0.5)]" asChild>
                 <Link href="/docs">
-                  View the Docs <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Explore SDK Docs <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
             </div>
@@ -60,53 +60,40 @@ export function SdkSection() {
               {/* Terminal Header */}
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-[rgba(11,18,32,0.08)]">
                 <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#2A8FA8]/40" />
-                  <div className="w-3 h-3 rounded-full bg-[#43B6D5]/40" />
-                  <div className="w-3 h-3 rounded-full bg-[#B3CDE0]/40" />
+                  <div className="w-3 h-3 rounded-full bg-[#f87171]/40" />
+                  <div className="w-3 h-3 rounded-full bg-[#fbbf24]/40" />
+                  <div className="w-3 h-3 rounded-full bg-[#34d399]/40" />
                 </div>
-                <div className="text-[10px] text-[#5B6B82] font-bold tracking-widest uppercase">shield_engine.sys</div>
+                <div className="text-[10px] text-[#5B6B82] font-bold tracking-widest uppercase">omen_sdk.ts</div>
               </div>
               
-              <div className="space-y-6">
-                <div className="text-[#43B6D5] font-bold tracking-widest text-[11px] border-b border-[#43B6D5]/10 pb-2">OMEN BENEFITS</div>
+              <div className="space-y-4">
+                <div className="text-[#43B6D5] font-bold tracking-widest text-[11px] border-b border-[#43B6D5]/10 pb-2 flex justify-between">
+                   <span>OMEN SECURITY FIREWALL</span>
+                   <span className="opacity-40 animate-pulse">PROTECTING</span>
+                </div>
                 
-                <div className="space-y-1">
-                  <div className="text-[#0B1220] font-bold text-[13px]">
-                    • Know who built the project
-                  </div>
-                  <div className="pl-4 text-[#4A5568] text-[12px] leading-relaxed">
-                    Users can see if a builder is verified.
-                  </div>
-                </div>
+                <div className="text-[13px] leading-relaxed font-mono space-y-2">
+                  <pre className="text-[#0B1220] overflow-x-auto">
+{`// Verify trust before interaction
+const trustScore = await omen.getTrustScore(protocol);
 
-                <div className="space-y-1">
-                  <div className="text-[#0B1220] font-bold text-[13px]">
-                    • Harder for scammers
-                  </div>
-                  <div className="pl-4 text-[#4A5568] text-[12px] leading-relaxed">
-                    Fake projects cannot easily pretend to be real.
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="text-[#0B1220] font-bold text-[13px]">
-                    • Safer interactions
-                  </div>
-                  <div className="pl-4 text-[#4A5568] text-[12px] leading-relaxed">
-                    Users know who they are dealing with before signing anything.
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="text-[#0B1220] font-bold text-[13px]">
-                    • Trust for real builders
-                  </div>
-                  <div className="pl-4 text-[#4A5568] text-[12px] leading-relaxed">
-                    Honest teams can prove they are real.
+if (trustScore < 85) {
+  abortTransaction();
+}`}
+                  </pre>
+                  <div className="mt-8 pt-4 border-t border-black/5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 rounded-full bg-green-500" />
+                      <span className="text-[10px] font-bold uppercase text-[#5B6B82]">Safety Check Passed</span>
+                    </div>
+                    <code className="text-[10px] text-[#4A5568] block">
+                      &gt; OmenRegistry lookup: Reputation Score 92/100 <br />
+                      &gt; No active security warnings detected.
+                    </code>
                   </div>
                 </div>
               </div>
-
             </div>
 
             {/* Status Floating Label */}
