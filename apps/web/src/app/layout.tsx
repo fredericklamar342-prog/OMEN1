@@ -22,7 +22,30 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Omen | Security Infrastructure",
   description: "Enterprise-grade identity and threat intelligence for decentralized ecosystems.",
+  icons: {
+    icon: [
+      { url: "/omen-logo.png", sizes: "512x512", type: "image/png" },
+      { url: "/omen-logo.png", sizes: "192x192", type: "image/png" },
+      { url: "/omen-logo.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/omen-logo.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/omen-logo.png",
+  },
+  openGraph: {
+    title: "Omen | Security Infrastructure",
+    description: "Enterprise-grade identity and threat intelligence for decentralized ecosystems.",
+    images: [{ url: "/omen-logo.png", width: 512, height: 512 }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Omen | Security Infrastructure",
+    description: "Enterprise-grade identity and threat intelligence for decentralized ecosystems.",
+    images: ["/omen-logo.png"],
+  },
 };
+
 
 import { ToastProvider } from "@/context/ToastContext";
 import { EarlyAccessModalProvider } from "@/context/EarlyAccessModalContext";
