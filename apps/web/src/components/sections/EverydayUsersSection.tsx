@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Lock01, SearchLg, AlertTriangle, ShieldCheck } from "@untitled-ui/icons-react";
+import { Lock01, SearchLg, AlertTriangle, ShieldTick } from "@untitled-ui/icons-react";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 export function EverydayUsersSection() {
   return (
-    <section className="py-24 md:py-32 relative z-10 bg-transparent" aria-labelledby="everyday-title">
+    <section id="product" className="py-32 md:py-64 relative z-10 bg-transparent" aria-labelledby="everyday-title">
       <div className="max-container flex flex-col items-center text-center relative z-10">
         
         {/* Headline */}
@@ -28,7 +28,7 @@ export function EverydayUsersSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, ease: "easeOut", delay: 0.05 }}
-          className="text-lg md:text-xl text-[#475569] max-w-2xl mb-20 leading-relaxed font-medium"
+          className="text-lg md:text-xl text-[#475569] max-w-2xl mb-20 leading-relaxed font-bold tracking-tight"
         >
           In Web3 a beautiful interface can still hide a malicious team. Omen Labs helps you verify who is behind a protocol before connecting your wallet.
         </motion.p>
@@ -64,7 +64,7 @@ export function EverydayUsersSection() {
             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#AAC0E1] to-[#43B6D5]" />
             <div className="w-20 h-20 rounded-[28px] bg-[#EAF3FA] flex items-center justify-center mb-8 relative group-hover:scale-110 transition-transform duration-500">
               <div className="absolute inset-0 bg-[#43B6D5]/20 rounded-[28px] animate-pulse" />
-              <ShieldCheck className="w-10 h-10 text-[#43B6D5] relative z-10" />
+              <ShieldTick className="w-10 h-10 text-[#43B6D5] relative z-10" />
             </div>
             <h3 className="text-2xl font-black text-[#0B1220] mb-4 uppercase tracking-tighter">Omen Verified</h3>
             <p className="text-[#475569] text-[15px] font-bold leading-relaxed px-2">
@@ -88,7 +88,7 @@ export function EverydayUsersSection() {
             <div className="space-y-4 flex-1">
               <div className="flex items-center justify-center sm:justify-start gap-3">
                  <div className="w-1.5 h-1.5 rounded-full bg-[#43B6D5] animate-pulse" />
-                 <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#43B6D5]">Protocol Insight</span>
+                 <span className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-[#43B6D5]">Protocol Insight</span>
               </div>
               <p className="text-lg md:text-xl text-[#0B1220] font-bold leading-relaxed tracking-tight">
                 Just like you look for the lock icon before entering your card online, look for the Omen Badge before signing a Sui transaction. <span className="text-[#43B6D5]">If it's not verified, it's not safe.</span>
@@ -111,9 +111,9 @@ export function EverydayUsersSection() {
              </Button>
           </Link>
           <Link href="/alpha" className="w-full sm:w-auto">
-             <Button variant="secondary" size="lg" className="w-full px-12 py-7 rounded-2xl text-[13px] font-black uppercase tracking-widest gap-2.5 bg-white border-black/[0.03] shadow-md hover:shadow-xl hover:scale-[1.05] transition-all">
-               <ShieldCheck className="w-5 h-5" /> Demand the Badge
-             </Button>
+              <Button variant="secondary" size="lg" className="w-full px-12 py-7 rounded-2xl text-[13px] font-black uppercase tracking-widest gap-2.5 bg-white border-black/[0.03] shadow-md hover:shadow-xl hover:scale-[1.05] transition-all">
+                <ShieldTick className="w-5 h-5" /> Demand the Badge
+              </Button>
           </Link>
         </motion.div>
 

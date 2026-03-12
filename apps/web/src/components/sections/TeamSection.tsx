@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Twitter, ShieldCheck } from "lucide-react";
+import { ShieldTick } from "@untitled-ui/icons-react";
+import { Github, Twitter } from "lucide-react";
 
 export function TeamSection() {
   return (
@@ -11,7 +12,7 @@ export function TeamSection() {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16 animate-fade-up">
           <span className="text-[11px] font-bold tracking-widest text-[#43B6D5] uppercase mb-4 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4" /> Built on Trust
+            <ShieldTick className="w-4 h-4" /> Built on Trust
           </span>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0B1220] mb-4">
             The Team Behind Omen

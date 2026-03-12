@@ -7,22 +7,22 @@ import { Terminal, ArrowRight } from "@untitled-ui/icons-react";
 
 export function SdkSection() {
   return (
-    <section id="developer" className="py-32 md:py-48 relative z-10 bg-transparent" aria-labelledby="sdk-title">
+    <section id="developer" className="py-32 md:py-64 relative z-10 bg-transparent" aria-labelledby="sdk-title">
       <div className="max-container relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
           <div className="space-y-10 animate-fade-up">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F1F5F9] border border-[#E2E8F0] rounded-full">
               <Terminal className="w-3.5 h-3.5 text-[#43B6D5]" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#475569]">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-[#475569]">
                 Developer Experience
               </span>
             </div>
             
             <div className="space-y-8">
-              <h2 id="sdk-title" className="text-4xl md:text-6xl font-extrabold tracking-tight text-[#0B1220]">
+              <h2 id="sdk-title" className="text-4xl md:text-6xl font-black tracking-tighter text-[#0B1220] uppercase font-outfit">
                 Simple to <span className="text-gradient">Integrate.</span>
               </h2>
-              <p className="text-xl text-[#475569] leading-relaxed font-medium">
+              <p className="text-xl text-[#475569] leading-relaxed font-bold tracking-tight">
                 Wallets, dApps, and autonomous AI agents integrate the Omen SDK to verify protocol safety before any transaction executes. A single check prevents interaction with malicious or unverified code.
               </p>
             </div>
@@ -35,7 +35,7 @@ export function SdkSection() {
                 { label: "Execution", val: "Sui PTBs" }
               ].map((stat, i) => (
                 <div key={i} className="space-y-1">
-                  <div className="text-[10px] font-black uppercase tracking-widest text-[#94A3B8]">{stat.label}</div>
+                  <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#94A3B8]">{stat.label}</div>
                   <div className="text-lg font-bold text-[#0B1220]">{stat.val}</div>
                 </div>
               ))}
@@ -77,11 +77,11 @@ if (trustScore < 85) {
                 <div className="mt-12 pt-6 border-t border-black/[0.05]">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-2 h-2 rounded-full bg-[#27C93F] animate-pulse" />
-                    <span className="text-[10px] font-black uppercase text-[#43B6D5] tracking-widest">Omen Security Firewall Active</span>
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#43B6D5] tracking-widest">Omen Security Firewall Active</span>
                   </div>
                   <div className="font-mono text-[11px] text-[#94A3B8] space-y-1">
                     <div>&gt; Checking protocol reputation on Walrus...</div>
-                    <div className="text-[#0B1220] font-bold">&gt; Verification: [92/100] INSTITUTIONAL GRADE</div>
+                    <div className="text-[#0B1220] font-black">&gt; Verification: [92/100] INSTITUTIONAL GRADE</div>
                   </div>
                 </div>
               </div>

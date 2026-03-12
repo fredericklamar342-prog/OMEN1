@@ -36,14 +36,14 @@ const pillars = [
 
 export function InfrastructureSection() {
   return (
-    <section className="py-32 md:py-48 bg-[#F8FAFC]/50 relative z-10 overflow-hidden border-y border-black/[0.02]" aria-labelledby="infra-title">
+    <section className="py-32 md:py-64 bg-[#F8FAFC]/50 relative z-10 overflow-hidden border-y border-black/[0.02]" aria-labelledby="infra-title">
       <div className="max-container flex flex-col items-center">
         
         <div className="text-center mb-24 animate-fade-up">
           <span className="text-[10px] font-black tracking-[0.2em] text-[#43B6D5] uppercase mb-6 inline-block">
             Ecosystem Integration
           </span>
-          <h2 id="infra-title" className="text-4xl md:text-6xl font-extrabold tracking-tight text-[#0B1220]">
+          <h2 id="infra-title" className="text-4xl md:text-6xl font-black tracking-tighter text-[#0B1220] uppercase font-outfit">
             Built on the Sui Stack
           </h2>
         </div>
@@ -62,14 +62,14 @@ export function InfrastructureSection() {
                 <div className="w-12 h-12 rounded-2xl bg-[#43B6D5]/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#43B6D5] transition-all duration-500">
                   <pillar.icon className="w-6 h-6 text-[#43B6D5] group-hover:text-white transition-colors" />
                 </div>
-                <div className="px-3 py-1 bg-white border border-black/5 rounded-full text-[10px] font-black text-[#94A3B8] group-hover:text-[#43B6D5] transition-colors">
+                <div className="px-3 py-1 bg-white border border-black/5 rounded-full text-[10px] font-mono font-bold text-[#94A3B8] group-hover:text-[#43B6D5] transition-colors">
                   {pillar.tag}
                 </div>
               </div>
               
-              <h3 className="text-2xl font-black text-[#0B1220] mb-2">{pillar.title}</h3>
+              <h3 className="text-2xl font-black text-[#0B1220] mb-2 uppercase tracking-tighter font-outfit">{pillar.title}</h3>
               <div className="text-xs font-bold text-[#43B6D5] uppercase tracking-wide mb-6">{pillar.subtitle}</div>
-              <p className="text-sm text-[#475569] leading-relaxed font-medium">
+              <p className="text-sm text-[#475569] leading-relaxed font-bold tracking-tight">
                 {pillar.description}
               </p>
             </motion.div>

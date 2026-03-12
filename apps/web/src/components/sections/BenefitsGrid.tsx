@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FeatureCard } from "@/components/ui/FeatureCard";
-import { UserCheck, ShieldCheck, Zap } from "lucide-react";
+import { UserCircle, ShieldTick, Zap } from "@untitled-ui/icons-react";
 
 export function BenefitsGrid() {
   return (
@@ -29,7 +29,7 @@ export function BenefitsGrid() {
               title="Verify Without Doxxing" 
               subtitle="For Builders" 
               description="Use zkLogin to link your GitHub or X reputation to your on-chain identity without exposing your wallet."
-              icon={UserCheck}
+              icon={UserCircle}
             />
           </div>
           <div className="animate-fade-up stagger-2">
@@ -37,7 +37,7 @@ export function BenefitsGrid() {
               title="Reputation That Cannot Be Sold" 
               subtitle="For Projects" 
               description="Receive a Soulbound Omen Badge that cannot be bought, sold, or transferred. Your reputation stays tied to your work."
-              icon={ShieldCheck}
+              icon={ShieldTick}
             />
           </div>
           <div className="animate-fade-up stagger-3">

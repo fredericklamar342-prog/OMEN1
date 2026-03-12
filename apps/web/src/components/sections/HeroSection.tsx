@@ -13,7 +13,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-transparent"
+      className="relative pt-32 pb-32 md:pt-48 md:pb-64 overflow-hidden bg-transparent"
       aria-labelledby="hero-title"
     >
       <div className="max-container flex flex-col items-center text-center relative z-10">
@@ -49,7 +49,7 @@ export function HeroSection() {
             <CheckCircle className="w-6 h-6 text-[#43B6D5]" />
             <div className="text-left">
               <div className="text-xs font-bold text-[#0B1220]">Private Alpha V1.0</div>
-              <div className="text-[10px] text-[#94A3B8] font-medium uppercase tracking-wider">Secured by Walrus</div>
+              <div className="text-[10px] text-[#94A3B8] font-mono font-bold uppercase tracking-widest">Secured by Walrus</div>
             </div>
           </motion.div>
         </div>
@@ -69,14 +69,14 @@ export function HeroSection() {
               height={14}
               className="w-3.5 h-3.5 object-contain"
             />
-            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#475569]">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-[#475569]">
               Native to the Sui Stack
             </span>
           </div>
 
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#27C93F]/5 border border-[#27C93F]/20 rounded-full">
             <div className="w-1.5 h-1.5 rounded-full bg-[#27C93F] animate-pulse shadow-[0_0_8px_#27C93F]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#27C93F]">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] text-[#27C93F]">
               Sui Testnet Live
             </span>
           </div>
@@ -108,7 +108,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-xl md:text-2xl text-[#475569] max-w-3xl mb-12 leading-relaxed font-medium"
+          className="text-xl md:text-2xl text-[#475569] max-w-3xl mb-12 leading-relaxed font-bold tracking-tight"
         >
           Web3 allows you to verify smart contracts, but it cannot verify who built them. Omen introduces a trust layer for the Sui ecosystem so wallets, apps, and AI agents can verify builder reputation before interacting with protocols.
         </motion.p>

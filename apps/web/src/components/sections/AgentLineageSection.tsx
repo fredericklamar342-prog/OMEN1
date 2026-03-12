@@ -5,7 +5,7 @@ import { GitBranch01, UserPlus01, ShieldTick } from "@untitled-ui/icons-react";
 
 export function AgentLineageSection() {
   return (
-    <section className="py-32 md:py-48 relative z-10 bg-white shadow-inner border-y border-black/[0.03]" aria-labelledby="lineage-title">
+    <section className="py-32 md:py-64 relative z-10 bg-white shadow-inner border-y border-black/[0.03]" aria-labelledby="lineage-title">
       <div className="max-container">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
           
@@ -66,14 +66,14 @@ export function AgentLineageSection() {
           <div className="flex-1 space-y-8 order-1 lg:order-2">
              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-[#43B6D5]/10 rounded-full mb-2">
                 <UserPlus01 className="w-4 h-4 text-[#43B6D5]" />
-                <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#43B6D5]">Agent Accountability</span>
+                <span className="text-[11px] font-mono font-bold uppercase tracking-[0.25em] text-[#43B6D5]">Agent Accountability</span>
              </div>
              
              <h2 id="lineage-title" className="text-4xl md:text-6xl font-black text-[#0B1220] uppercase leading-[1.1] tracking-tight font-outfit">
                Agents inherit the <br /> <span className="text-gradient">Reputation</span> <br className="hidden md:block" /> of their creators.
              </h2>
              
-             <p className="text-lg md:text-xl text-[#475569] leading-relaxed font-medium max-w-xl">
+             <p className="text-lg md:text-xl text-[#475569] leading-relaxed font-bold max-w-xl">
                Omen introduces the <strong>Agentic Lineage Graph</strong>. AI agents are cryptographically linked to their creators through soulbound identities. If an agent behaves maliciously, the penalty ripples up the graph, affecting the original builder's trust score.
              </p>
 
@@ -83,7 +83,7 @@ export function AgentLineageSection() {
                     <div className="w-11 h-11 rounded-xl bg-white shadow-sm border border-[#43B6D5]/20 flex items-center justify-center text-[#43B6D5] group-hover:scale-110 transition-transform">
                       <ShieldTick className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#43B6D5]">Protocol Guarantee</span>
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-[0.3em] text-[#43B6D5]">Protocol Guarantee</span>
                   </div>
                   <p className="text-[15px] md:text-[17px] font-bold text-[#475569] leading-relaxed tracking-tight pl-0.5">
                     Eliminate "Anonymous Algorithmic Attacks" by making creators programmatically accountable for their bots.

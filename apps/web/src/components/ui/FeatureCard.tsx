@@ -8,7 +8,7 @@ interface FeatureCardProps {
   title: string;
   subtitle: string;
   description: string;
-  icon: LucideIcon;
+  icon: React.ElementType;
   delay?: number;
 }
 

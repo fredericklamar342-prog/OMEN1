@@ -111,7 +111,7 @@ export function HowItWorksSection() {
 
                        <div className="space-y-4">
                           <h3 className="text-3xl font-black text-[#0B1220] tracking-tighter uppercase font-outfit leading-none">{step.title}</h3>
-                          <p className="text-lg text-[#475569] leading-relaxed font-bold opacity-80 group-hover:opacity-100 transition-opacity">
+                          <p className="text-lg text-[#475569] leading-relaxed font-bold tracking-tight opacity-80 group-hover:opacity-100 transition-opacity">
                             {step.description}
                           </p>
                        </div>

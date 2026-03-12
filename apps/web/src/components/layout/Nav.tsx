@@ -45,7 +45,7 @@ export function Nav() {
   }, []);
 
   const navLinks = [
-    { name: "Product", href: "/#benefits" },
+    { name: "Product", href: "/#product" },
     { name: "How it Works", href: "/#how-it-works" },
     { name: "Dashboard", href: "/dashboard" },
     { name: "Developers", href: "/developer" },

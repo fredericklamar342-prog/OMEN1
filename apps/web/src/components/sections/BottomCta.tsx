@@ -16,7 +16,7 @@ export function BottomCta() {
       <div className="max-container relative z-10">
         <div className="animate-fade-up space-y-16">
           <div className="space-y-6">
-            <h2 className="text-5xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-[#0B1220] leading-[0.85] text-balance">
+            <h2 id="cta-title" className="text-5xl md:text-8xl lg:text-9xl font-black tracking-tighter text-[#0B1220] leading-[0.85] text-balance uppercase font-outfit">
               The Trust Layer <br />
               <span className="text-gradient">
                 for the Agentic Web.
@@ -38,7 +38,7 @@ export function BottomCta() {
 
           <div className="flex flex-col items-center gap-12 mt-32">
             <div className="h-32 w-px bg-gradient-to-b from-black/[0.08] to-transparent" />
-            <p className="text-[10px] font-black uppercase tracking-[0.6em] text-[#94A3B8]">Private Alpha V1.0 Pulse — Verified by Sui Testnet</p>
+            <p className="text-[10px] font-mono font-bold uppercase tracking-[0.6em] text-[#94A3B8]">Private Alpha V1.0 Pulse — Verified by Sui Testnet</p>
           </div>
         </div>
       </div>
