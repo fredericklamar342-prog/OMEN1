@@ -21,6 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://omen.labs"), // Updated to reflect the brand
   title: "Omen | Security Infrastructure",
   description: "Enterprise-grade identity and threat intelligence for decentralized ecosystems.",
   icons: {

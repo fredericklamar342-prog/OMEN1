@@ -46,31 +46,31 @@ const socialLinks = [
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-transparent text-[#0B1220]">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#FFFFFF] text-[#49A5BD]">
       <AtmosphericBackground />
       <Nav />
       
       <main className="relative z-10 flex-1 pt-28 pb-20">{children}</main>
 
-      <footer className="relative z-10 bg-white/60 border-t border-black/[0.03] backdrop-blur-3xl pt-32 pb-16 overflow-hidden">
+      <footer className="relative z-10 bg-[#FFFFFF] border-t-2 border-[#49A5BD] pt-32 pb-16 overflow-hidden">
         {/* Subtle Background Accent */}
-        <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-[#43B6D5]/10 to-transparent -z-10" />
+        <div className="absolute top-0 right-0 w-[60%] h-full bg-[#FFFFFF] -z-10" />
         
         <div className="max-container">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 mb-24">
             
             <div className="col-span-2 lg:col-span-2 space-y-10 pr-12">
-              <div className="flex items-center gap-3.5 group/logo cursor-default">
+               <div className="flex items-center gap-3.5 group/logo cursor-default">
                 <Image
                   src="/omen-logo.png"
                   alt="Omen"
                   width={48}
                   height={40}
-                  className="h-11 w-auto object-contain transition-transform group-hover/logo:scale-110"
+                  className="h-11 w-auto object-contain transition-transform"
                 />
-                <span className="text-2xl font-black uppercase tracking-tighter text-[#0B1220]">OMEN</span>
+                <span className="text-2xl font-black uppercase tracking-tighter text-[#49A5BD]">OMEN</span>
               </div>
-              <p className="text-[13px] text-[#5B6B82] font-semibold leading-relaxed max-w-sm">
+              <p className="text-[13px] text-[#49A5BD] font-semibold leading-relaxed max-w-sm">
                 The trust primitive for the Sui Stack. Solving accountability in on-chain finance and the agentic economy through Move-native reputation infrastructure.
               </p>
               <div className="flex items-center gap-4">
@@ -81,7 +81,7 @@ export function Layout({ children }: LayoutProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-10 h-10 rounded-full bg-white border border-black/5 flex items-center justify-center text-[#5B6B82] transition-all hover:bg-[#43B6D5]/10 hover:text-[#43B6D5] hover:scale-110"
+                    className="w-10 h-10 rounded-full bg-[#FFFFFF] border-2 border-[#49A5BD] flex items-center justify-center text-[#49A5BD] transition-all hover:bg-[#49A5BD] hover:text-[#FFFFFF] hover:scale-110 shadow-sm"
                   >
                     {icon}
                   </a>
@@ -91,7 +91,7 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Sitemap Columns */}
             <div className="space-y-8">
-              <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#0B1220]">Protocol</h4>
+              <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#49A5BD]">Protocol</h4>
               <ul className="space-y-4">
                 {[
                   { name: "Overview", href: "/product" },
@@ -100,8 +100,8 @@ export function Layout({ children }: LayoutProps) {
                   { name: "Audit Trail", href: "/dashboard" }
                 ].map(link => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-[13px] font-bold text-[#5B6B82] hover:text-[#43B6D5] transition-all flex items-center gap-2 group/link">
-                      <span className="w-0 h-px bg-[#43B6D5] transition-all group-hover/link:w-2" />
+                    <Link href={link.href} className="text-[13px] font-bold text-[#49A5BD] hover:opacity-70 transition-all flex items-center gap-2 group/link">
+                      <span className="w-0 h-px bg-[#49A5BD] transition-all group-hover/link:w-2" />
                       {link.name}
                     </Link>
                   </li>
@@ -110,7 +110,7 @@ export function Layout({ children }: LayoutProps) {
             </div>
 
             <div className="space-y-8">
-              <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#0B1220]">Developers</h4>
+              <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#49A5BD]">Developers</h4>
               <ul className="space-y-4">
                 {[
                   { name: "Documentation", href: "/docs" },
@@ -119,8 +119,8 @@ export function Layout({ children }: LayoutProps) {
                   { name: "MCP Server", href: "/docs#mcp" }
                 ].map(link => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-[13px] font-bold text-[#5B6B82] hover:text-[#43B6D5] transition-all flex items-center gap-2 group/link">
-                      <span className="w-0 h-px bg-[#43B6D5] transition-all group-hover/link:w-2" />
+                    <Link href={link.href} className="text-[13px] font-bold text-[#49A5BD] hover:opacity-70 transition-all flex items-center gap-2 group/link">
+                      <span className="w-0 h-px bg-[#49A5BD] transition-all group-hover/link:w-2" />
                       {link.name}
                     </Link>
                   </li>
@@ -129,7 +129,7 @@ export function Layout({ children }: LayoutProps) {
             </div>
 
             <div className="space-y-8">
-              <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#0B1220]">Company</h4>
+              <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#49A5BD]">Company</h4>
               <ul className="space-y-4">
                 {[
                   { name: "About Omen", href: "/" },
@@ -138,8 +138,8 @@ export function Layout({ children }: LayoutProps) {
                   { name: "Blog", href: "/blog" }
                 ].map(link => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-[13px] font-bold text-[#5B6B82] hover:text-[#43B6D5] transition-all flex items-center gap-2 group/link">
-                      <span className="w-0 h-px bg-[#43B6D5] transition-all group-hover/link:w-2" />
+                    <Link href={link.href} className="text-[13px] font-bold text-[#49A5BD] hover:opacity-70 transition-all flex items-center gap-2 group/link">
+                      <span className="w-0 h-px bg-[#49A5BD] transition-all group-hover/link:w-2" />
                       {link.name}
                     </Link>
                   </li>
@@ -148,19 +148,19 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between border-t border-black/[0.03] pt-12 gap-8">
+           <div className="flex flex-col md:flex-row items-center justify-between border-t-2 border-[#49A5BD]/20 pt-12 gap-8">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-10 gap-y-4">
-               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#5B6B82]/50 italic">&copy; {new Date().getFullYear()} OMEN. ALL RIGHTS RESERVED.</p>
+               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#49A5BD] opacity-50 italic">&copy; {new Date().getFullYear()} OMEN. ALL RIGHTS RESERVED.</p>
                <div className="flex gap-8">
-                 <Link href="/privacy" className="text-[11px] font-black uppercase tracking-[0.15em] text-[#5B6B82]/60 hover:text-[#43B6D5] transition-colors underline decoration-transparent hover:decoration-[#43B6D5] underline-offset-4">Privacy</Link>
-                 <Link href="/terms" className="text-[11px] font-black uppercase tracking-[0.15em] text-[#5B6B82]/60 hover:text-[#43B6D5] transition-colors underline decoration-transparent hover:decoration-[#43B6D5] underline-offset-4">Terms</Link>
+                 <Link href="/privacy" className="text-[11px] font-black uppercase tracking-[0.15em] text-[#49A5BD] opacity-60 hover:opacity-100 transition-colors underline decoration-transparent hover:decoration-[#49A5BD] underline-offset-4">Privacy</Link>
+                 <Link href="/terms" className="text-[11px] font-black uppercase tracking-[0.15em] text-[#49A5BD] opacity-60 hover:opacity-100 transition-colors underline decoration-transparent hover:decoration-[#49A5BD] underline-offset-4">Terms</Link>
                </div>
             </div>
             
             <div className="flex items-center">
-                <div className="flex items-center gap-3 px-5 py-2.5 bg-[#43B6D5]/5 border border-[#43B6D5]/10 rounded-full hover:bg-[#43B6D5]/10 transition-all group cursor-default shadow-sm">
-                  <div className="w-2 h-2 rounded-full bg-[#43B6D5] animate-pulse shadow-[0_0_8px_#43B6D5]" />
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#43B6D5] group-hover:scale-105 transition-all">Status: OMEN_TESTNET_ACTIVE</span>
+                <div className="flex items-center gap-3 px-5 py-2.5 border-2 border-[#49A5BD] rounded-full transition-all group cursor-default">
+                  <div className="w-2 h-2 rounded-full bg-[#49A5BD]" />
+                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-[#49A5BD]">Status: OMEN_TESTNET_ACTIVE</span>
                 </div>
             </div>
           </div>

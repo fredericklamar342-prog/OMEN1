@@ -12,15 +12,18 @@
     "@babel/runtime": "^7.28.6",
     "@emailjs/browser": "^4.4.1",
     "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/supabase-js": "^2.99.1",
     "@untitled-ui/icons-react": "^0.1.4",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "resend": "^6.9.3",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

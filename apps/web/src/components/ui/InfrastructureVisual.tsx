@@ -59,7 +59,7 @@ export function InfrastructureVisual() {
               style={{
                 top: `${50 + 35 * Math.sin(i * (Math.PI / 6))}%`,
                 left: `${50 + 35 * Math.cos(i * (Math.PI / 6))}%`,
-                boxShadow: "0 0 8px #B11226",
+                boxShadow: "0 0 8px #49A5BD",
               }}
             />
           ))}

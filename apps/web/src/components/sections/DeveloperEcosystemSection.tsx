@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import SuiIcon from "@/components/icons/SuiIcon";
+import WalrusIcon from "@/components/icons/WalrusIcon";
 
 const features = [
   "Lightweight on-chain verification registry",
-  "Heavy metadata anchored through Walrus Blob IDs",
+  <>Heavy metadata anchored through <WalrusIcon className="inline-block w-4 h-4 ml-1" /> Walrus Blob IDs</>,
   "Fast verification lookups for dApps",
   "SDK for wallets and protocols",
   "Support for AI agent lineage accountability",
@@ -28,8 +30,8 @@ export function DeveloperEcosystemSection() {
             <span className="text-[11px] font-bold tracking-widest text-[#43B6D5] uppercase mb-4 block">
               For Developers
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0B1220] leading-[1.1]">
-              Built for the <br className="hidden lg:block" />Sui Ecosystem
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#0B1220] leading-[1.1] flex items-center justify-center lg:justify-start gap-2">
+              Built for the <br className="hidden lg:block" /><SuiIcon className="w-8 h-8 md:w-10 md:h-10" /> Sui Ecosystem
             </h2>
           </motion.div>
 

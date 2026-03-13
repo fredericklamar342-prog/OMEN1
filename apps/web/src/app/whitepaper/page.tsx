@@ -3,6 +3,9 @@
 import { Layout } from "@/components/layout/Layout";
 import { File02, UserCheck01, LayersThree01, Database01, Zap, CpuChip01, Activity, ShieldTick, CheckCircle, Download01, Share01, Users01 } from "@untitled-ui/icons-react";
 import { Button } from "@/components/ui/Button";
+import SuiIcon from "@/components/icons/SuiIcon";
+import WalrusIcon from "@/components/icons/WalrusIcon";
+import GoogleIcon from "@/components/icons/GoogleIcon";
 
 const sections = [
   { id: "abstract", title: "1. Abstract" },
@@ -28,7 +31,7 @@ export default function WhitepaperPage() {
            
            <h1 className="text-5xl md:text-8xl font-extrabold tracking-tighter text-[#0B1220] mb-10 leading-[0.85] text-balance">
              The Trust Primitive <br />
-             <span className="text-gradient">for the Sui Stack.</span>
+             <span className="text-gradient flex items-center justify-center gap-4">for the <SuiIcon className="w-12 h-12 md:w-20 md:h-20" /> Sui Stack.</span>
            </h1>
            
            <p className="text-xl md:text-2xl text-[#475569] max-w-4xl leading-relaxed font-medium">
@@ -66,7 +69,7 @@ export default function WhitepaperPage() {
                 </div>
                 <div className="space-y-6">
                   <p className="text-xl text-[#475569] leading-relaxed font-medium">
-                    The Omen protocol provides a decentralized reputation layer for the Sui ecosystem. By linking human founders to their autonomous agents via zkLogin verified OmenBadges, we establish a permanent accountability layer. The system utilizes Walrus for secure storage of large audit metadata and Move PTBs for on-chain enforcement.
+                    The Omen protocol provides a decentralized reputation layer for the <span className="inline-flex items-center gap-1.5"><SuiIcon className="w-5 h-5" /> Sui</span> ecosystem. By linking human founders to their autonomous agents via <span className="inline-flex items-center gap-1.5">zkLogin <GoogleIcon className="w-4 h-4" /></span> verified OmenBadges, we establish a permanent accountability layer. The system utilizes <span className="inline-flex items-center gap-1.5"><WalrusIcon className="w-5 h-5" /> Walrus</span> for secure storage of large audit metadata and Move PTBs for on-chain enforcement.
                   </p>
                 </div>
              </section>
@@ -107,8 +110,8 @@ export default function WhitepaperPage() {
                    <div className="w-12 h-12 bg-[#0B1220] flex items-center justify-center text-white rounded-xl shadow-xl"><Database01 className="w-6 h-6"/></div>
                    <h2 className="text-4xl font-extrabold text-[#0B1220] tracking-tight">Storage Layer</h2>
                 </div>
-                <p className="text-lg text-[#475569] leading-relaxed font-medium">
-                  Heavy metadata—such as raw JSON outputs from AI code audits—is stored via <strong>Walrus Protocol</strong>. OmenBadges store a 256-bit hash and a Blob ID using Sui Dynamic Fields, ensuring O(1) verification efficiency.
+                 <p className="text-lg text-[#475569] leading-relaxed font-medium">
+                  Heavy metadata—such as raw JSON outputs from AI code audits—is stored via <strong><span className="inline-flex items-center gap-1.5"><WalrusIcon className="w-5 h-5" /> Walrus Protocol</span></strong>. OmenBadges store a 256-bit hash and a Blob ID using <SuiIcon className="inline-block w-4 h-4 mx-1" /> Sui Dynamic Fields, ensuring O(1) verification efficiency.
                 </p>
              </section>
 
@@ -162,8 +165,8 @@ export default function WhitepaperPage() {
                    <div className="w-12 h-12 bg-[#0B1220] flex items-center justify-center text-white rounded-xl shadow-xl"><CheckCircle className="w-6 h-6"/></div>
                    <h2 className="text-4xl font-extrabold text-[#0B1220] tracking-tight">Conclusion</h2>
                 </div>
-                <p className="text-xl text-[#475569] leading-relaxed font-medium">
-                  Omen is the trust infrastructure standard for the sui-native agentic economy. By making reputation programmatic and non-transferable, we ensure that as the ecosystem grows, accountability remains central to every transaction.
+                 <p className="text-xl text-[#475569] leading-relaxed font-medium">
+                  Omen is the trust infrastructure standard for the <span className="inline-flex items-center gap-1.5"><SuiIcon className="w-6 h-6" /> sui-native</span> agentic economy. By making reputation programmatic and non-transferable, we ensure that as the ecosystem grows, accountability remains central to every transaction.
                 </p>
              </section>
           </article>

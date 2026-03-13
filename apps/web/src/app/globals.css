@@ -6,30 +6,34 @@
   --font-outfit: var(--font-outfit), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 
-  /* Brand Gradients & Colors - Starry Night */
-  --color-primary-start: #0C1446;
-  --color-primary-mid: #2B5C92;
-  --color-primary-end: #B3CDE0;
+  /* Brand Colors - Strictly White and Teal */
+  --color-primary: #49A5BD;
+  --color-teal: #49A5BD;
+  --color-white: #FFFFFF;
   
-  --color-midnight: #0E2A66;
-  --color-ocean: #2B5C92;
-  --color-sky: #B3CDE0;
-  --color-ice-glow: #EAF3FA;
-  --color-deep-navy: #0C1446;
+  --color-primary-start: #49A5BD;
+  --color-primary-mid: #49A5BD;
+  --color-primary-end: #49A5BD;
+  
+  --color-midnight: #49A5BD;
+  --color-ocean: #49A5BD;
+  --color-sky: #49A5BD;
+  --color-ice-glow: #FFFFFF;
+  --color-deep-navy: #49A5BD;
 
-  /* Backgrounds - Atmospheric Sky */
-  --color-background: #F5FEFF;
-  --color-sky-light: #F5FEFF;
-  --color-sky-mid: #AAC0E1;
-  --color-royal: #0E2F76;
-  --color-sky-deep: #0E2F76;
+  /* Backgrounds */
+  --color-background: #FFFFFF;
+  --color-sky-light: #FFFFFF;
+  --color-sky-mid: #FFFFFF;
+  --color-royal: #49A5BD;
+  --color-sky-deep: #49A5BD;
 
-  /* Text - High Contrast for Light BG */
-  --color-foreground: #0B1220;
-  --color-body: #4A5568;
+  /* Text */
+  --color-foreground: #49A5BD;
+  --color-body: #49A5BD;
 
   /* Borders */
-  --color-border: rgba(14, 47, 118, 0.08);
+  --color-border: #49A5BD;
 
   /* Animation */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
@@ -37,10 +41,10 @@
 }
 
 :root {
-  --background: #F5FEFF;
-  --foreground: #0B1220;
-  --body: #4A5568;
-  --border: rgba(14, 47, 118, 0.08);
+  --background: #FFFFFF;
+  --foreground: #49A5BD;
+  --body: #49A5BD;
+  --border: #49A5BD;
 }
 
 *,
@@ -55,13 +59,7 @@ html {
 }
 
 body {
-  background: linear-gradient(
-    to bottom,
-    #F5FEFF 0%,
-    #AAC0E1 50%,
-    #0E2F76 100%
-  );
-  background-attachment: fixed;
+  background: #FFFFFF;
   color: var(--foreground);
   font-family: var(--font-inter);
   font-weight: 500;
@@ -87,10 +85,7 @@ body {
   h1 {
     font-size: clamp(40px, 8vw, 84px);
     margin-bottom: 24px;
-    background: linear-gradient(to bottom, #0B1220 0%, #4A5568 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #49A5BD;
   }
 
   h2 {
@@ -114,7 +109,7 @@ body {
 
   a {
     transition: all var(--duration-interaction) var(--ease-premium);
-    color: #43B6D5;
+    color: #49A5BD;
     text-decoration: none;
   }
 }
@@ -143,37 +138,27 @@ body {
 
 /* ─── Premium Glassmorphism ─────────────────────────────────────────────── */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: #FFFFFF;
+  border: 2px solid #49A5BD;
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   transition: all 0.3s var(--ease-premium);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: #FFFFFF;
+  border: 2px solid #49A5BD;
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
   transition: all 0.3s var(--ease-premium);
 }
 
 .glass-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08);
-  border-color: rgba(67, 182, 213, 0.2);
+  border-color: #49A5BD;
 }
 
 /* ─── Utils ────────────────────────────────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #43B6D5 0%, #2B5C92 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #49A5BD;
 }
 
 /* ─── Form elements ─────────────────────────────────────────────────────── */
@@ -181,22 +166,21 @@ body {
   width: 100%;
   padding: 14px 18px;
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 2px solid #49A5BD;
   border-radius: 12px;
   font-size: 15px;
-  color: #0B1220;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  color: #49A5BD;
   outline: none;
   transition: all 0.2s var(--ease-premium);
 }
 
 .omen-input::placeholder {
-  color: #94A3B8;
+  color: #49A5BD;
+  opacity: 0.6;
 }
 
 .omen-input:focus {
-  border-color: #43B6D5;
-  box-shadow: 0 0 0 4px rgba(67, 182, 213, 0.1);
+  border-color: #49A5BD;
 }
 
 /* ─── Layout Utils ──────────────────────────────────────────────────────── */

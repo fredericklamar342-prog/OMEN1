@@ -17,27 +17,22 @@ export interface ButtonProps
 
 const variants = {
   primary: [
-    "bg-gradient-to-r from-[#2A8FA8] via-[#43B6D5] to-[#B3CDE0]",
-    "bg-[length:200%_auto]",
-    "text-white border-none",
-    "shadow-[0_8px_20px_rgba(43,92,146,0.25)]",
-    "hover:bg-[position:right_center]",
+    "bg-[#49A5BD]",
+    "text-[#FFFFFF] border-none",
+    "hover:opacity-90",
     "hover:scale-[1.03]",
-    "hover:shadow-[0_12px_30px_rgba(43,92,146,0.35)]",
-    "active:scale-100 active:shadow-[0_8px_20px_rgba(43,92,146,0.25)]",
+    "active:scale-100",
   ].join(" "),
 
   secondary: [
-    "bg-white/62 backdrop-blur-[20px]",
-    "text-[#2A8FA8]",
-    "border border-white/85",
-    "shadow-[0_4px_12px_rgba(11,18,32,0.05)]",
+    "bg-[#FFFFFF]",
+    "text-[#49A5BD]",
+    "border-2 border-[#49A5BD]",
     "hover:-translate-y-[2px]",
-    "hover:shadow-[0_8px_24px_rgba(43,92,146,0.15)] hover:border-white",
     "active:translate-y-0",
   ].join(" "),
 
-  link: "bg-transparent text-[#43B6D5] hover:text-[#2A8FA8] p-0 h-auto",
+  link: "bg-transparent text-[#49A5BD] hover:opacity-80 p-0 h-auto",
 };
 
 const sizes = {

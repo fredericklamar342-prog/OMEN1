@@ -2,51 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, CheckCircle, Mail01, ShieldTick, Stars01 } from "@untitled-ui/icons-react";
+import { motion } from "framer-motion";
+import { ArrowLeft, ShieldTick, Stars01, ArrowRight } from "@untitled-ui/icons-react";
 import { Button } from "@/components/ui/Button";
-import { submitEarlyAccessRegistration } from "@/utils/emailjs";
-
-type SubmitState = {
-  status: "idle" | "submitting" | "success" | "error";
-  message: string;
-};
-
-const initialState: SubmitState = {
-  status: "idle",
-  message: "",
-};
+import { useEarlyAccessModal } from "@/context/EarlyAccessModalContext";
 
 export default function EarlyAccessPage() {
-  const [submitState, setSubmitState] = React.useState<SubmitState>(initialState);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (submitState.status === "submitting") return;
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    setSubmitState({ status: "submitting", message: "" });
-
-    try {
-      const result = await submitEarlyAccessRegistration({
-        email: String(formData.get("email") || ""),
-        project: String(formData.get("project") || ""),
-        wallet: String(formData.get("wallet") || ""),
-        source: "early-access-page",
-      });
-
-      form.reset();
-      setSubmitState({
-        status: "success",
-        message: result.message,
-      });
-    } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
-      setSubmitState({ status: "error", message });
-    }
-  };
+  const { openModal } = useEarlyAccessModal();
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white text-[#0B1220] selection:bg-[#43B6D5]/20 pb-20">
@@ -118,137 +80,36 @@ export default function EarlyAccessPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="glass-card bg-white border-black/[0.03] rounded-[48px] p-10 sm:p-14 shadow-2xl relative overflow-hidden"
+          className="glass-card bg-white border-black/[0.03] rounded-[48px] p-10 sm:p-14 shadow-2xl relative overflow-hidden flex flex-col justify-center"
         >
           <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#43B6D5]/30 to-transparent" />
-          <AnimatePresence mode="wait">
-            {submitState.status === "success" ? (
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.96, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                className="flex min-h-[520px] flex-col items-center justify-center text-center"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="mb-10 flex h-24 w-24 items-center justify-center rounded-[32px] border border-[#27C93F]/20 bg-[#27C93F]/10 shadow-xl shadow-[#27C93F]/5"
-                >
-                  <CheckCircle className="h-12 w-12 text-[#27C93F]" />
-                </motion.div>
-                <h2 className="text-4xl font-black text-[#0B1220] uppercase tracking-tighter">Registration complete</h2>
-                <p className="mt-6 max-w-sm text-lg font-medium text-[#64748B] leading-relaxed">{submitState.message}</p>
-                <div className="mt-12 flex w-full max-w-sm flex-col gap-4">
-                  <Button variant="secondary" size="lg" className="h-14 rounded-2xl border-black/[0.03] text-xs font-black uppercase tracking-widest bg-white shadow-sm" asChild>
-                    <Link href="/docs">
-                      <Mail01 className="mr-3 h-4 w-4" />
-                      Protocol Documentation
-                    </Link>
-                  </Button>
-                  <Button size="lg" className="h-14 rounded-2xl bg-[#0B1220] text-white border-none shadow-xl text-xs font-black uppercase tracking-widest" onClick={() => setSubmitState(initialState)}>
-                    Induct Another Node
-                  </Button>
+          
+          <div className="w-full text-center space-y-12">
+            <div className="space-y-6">
+              <div className="flex justify-center mb-8">
+                <div className="w-20 h-20 rounded-[28px] bg-[#43B6D5]/5 border border-[#43B6D5]/10 flex items-center justify-center">
+                  <Stars01 className="w-10 h-10 text-[#43B6D5]" />
                 </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="form"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className="w-full"
+              </div>
+              <h2 className="text-4xl font-black text-[#0B1220] uppercase tracking-tighter leading-none">Join the Private Alpha</h2>
+              <p className="text-lg font-medium text-[#64748B] leading-relaxed max-w-sm mx-auto">
+                Secure your position in the Omen trust hierarchy. Register to receive prioritize access and early badge allocation.
+              </p>
+            </div>
+
+            <div className="pt-6 space-y-6">
+              <Button
+                onClick={openModal}
+                size="lg"
+                className="w-full h-16 bg-[#0B1220] hover:bg-[#0B1220]/90 text-white border-none rounded-2xl shadow-xl hover:shadow-2xl transition-all text-xs font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3"
               >
-                <div className="mb-14">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="h-px w-6 bg-[#43B6D5]" />
-                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#43B6D5]">
-                      Credential Intake
-                    </p>
-                  </div>
-                  <h2 className="text-4xl font-black text-[#0B1220] uppercase tracking-tighter leading-none mb-6">Request access</h2>
-                  <p className="text-lg font-medium text-[#64748B] leading-relaxed">
-                    Submit your credentials to initiate the handshake process with the Omen infrastructure hub.
-                  </p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  <div className="space-y-6">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#94A3B8]">
-                        Communications Node (Email)
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="founder@project.xyz"
-                        required
-                        className="w-full h-16 px-6 rounded-2xl bg-[#F8FAFC] border border-black/[0.03] text-sm font-bold placeholder:text-[#94A3B8]/60 focus:ring-2 focus:ring-[#43B6D5]/20 focus:bg-white transition-all outline-none"
-                      />
-                    </div>
-
-                    <div className="grid gap-6 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#94A3B8]">
-                          Project Identity
-                        </label>
-                        <input
-                          type="text"
-                          name="project"
-                          placeholder="Node-Alpha"
-                          className="w-full h-16 px-6 rounded-2xl bg-[#F8FAFC] border border-black/[0.03] text-sm font-bold placeholder:text-[#94A3B8]/60 focus:ring-2 focus:ring-[#43B6D5]/20 focus:bg-white transition-all outline-none"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#94A3B8]">
-                          Settlement Pointer (Sui)
-                        </label>
-                        <input
-                          type="text"
-                          name="wallet"
-                          placeholder="0x... or name.sui"
-                          className="w-full h-16 px-6 rounded-2xl bg-[#F8FAFC] border border-black/[0.03] text-sm font-bold placeholder:text-[#94A3B8]/60 focus:ring-2 focus:ring-[#43B6D5]/20 focus:bg-white transition-all outline-none"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-3xl border border-black/[0.03] bg-[#F8FAFC] p-8 text-[11px] font-bold text-[#64748B] italic leading-relaxed uppercase tracking-widest">
-                    Confirmation email will be dispatched to the verified communications node. Synchronization time may vary by network load.
-                  </div>
-
-                  <AnimatePresence>
-                    {submitState.status === "error" && (
-                      <motion.p
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="rounded-2xl border border-rose-200 bg-rose-50 px-6 py-4 text-sm font-bold text-rose-700"
-                        role="alert"
-                      >
-                        {submitState.message}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-
-                  <div className="pt-6">
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full h-16 bg-[#0B1220] hover:bg-[#0B1220]/90 text-white border-none rounded-2xl shadow-xl hover:shadow-2xl transition-all text-xs font-black uppercase tracking-[0.2em]"
-                      isLoading={submitState.status === "submitting"}
-                    >
-                      {submitState.status === "submitting" ? "Synchronizing..." : "Initiate Handshake"}
-                    </Button>
-                    <p className="text-center mt-6 text-[9px] font-bold text-[#94A3B8] uppercase tracking-widest italic leading-relaxed">
-                       Security verified by Omen Protocol Private Alpha V1.0 <br /> Guaranteed end-to-end cryptographic transit.
-                    </p>
-                  </div>
-                </form>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                Join the Waitlist <ArrowRight className="w-4 h-4" />
+              </Button>
+              <p className="text-center text-[9px] font-bold text-[#94A3B8] uppercase tracking-widest italic leading-relaxed">
+                 Security verified by Omen Protocol Private Alpha V1.0 <br /> Guaranteed end-to-end cryptographic transit.
+              </p>
+            </div>
+          </div>
         </motion.section>
       </div>
     </div>

@@ -33,13 +33,13 @@ const benefits = [
 
 export function BenefitsSection() {
   return (
-    <section id="benefits" className="py-32 md:py-64 relative overflow-hidden bg-white/30 backdrop-blur-sm border-y border-black/[0.03]" aria-labelledby="benefits-title">
+    <section id="benefits" className="py-32 md:py-64 relative overflow-hidden bg-[#FFFFFF] border-y border-[#49A5BD]/10" aria-labelledby="benefits-title">
       <div className="max-container">
         <div className="flex flex-col items-center text-center mb-24 animate-fade-up">
-          <span className="text-[10px] font-black tracking-[0.2em] text-[#43B6D5] uppercase mb-6">
+          <span className="text-[10px] font-black tracking-[0.2em] text-[#49A5BD] uppercase mb-6">
             The Value Layer
           </span>
-          <h2 id="benefits-title" className="text-4xl md:text-6xl font-black tracking-tighter text-[#0B1220] uppercase font-outfit">
+          <h2 id="benefits-title" className="text-4xl md:text-6xl font-black tracking-tighter text-[#49A5BD] uppercase font-outfit">
             Why Omen Exists
           </h2>
         </div>
@@ -52,18 +52,18 @@ export function BenefitsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-card p-8 group flex flex-col h-full bg-white/40 border-white"
+              className="glass-card p-8 group flex flex-col h-full bg-[#FFFFFF] border-2 border-[#49A5BD]"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 group-hover:bg-[#43B6D5]/10 group-hover:scale-110 transition-all duration-300">
-                <benefit.icon className="w-6 h-6 text-[#43B6D5]" />
+              <div className="w-12 h-12 rounded-2xl bg-[#FFFFFF] border-2 border-[#49A5BD] flex items-center justify-center mb-8 group-hover:bg-[#49A5BD] group-hover:scale-110 transition-all duration-300">
+                <benefit.icon className="w-6 h-6 text-[#49A5BD] group-hover:text-[#FFFFFF]" />
               </div>
-              <div className="text-[10px] font-mono font-bold text-[#43B6D5] uppercase tracking-[0.2em] mb-3">
+              <div className="text-[10px] font-mono font-bold text-[#49A5BD] uppercase tracking-[0.2em] mb-3">
                 {benefit.tag}
               </div>
-              <h3 className="text-xl font-bold text-[#0B1220] mb-4 group-hover:text-[#43B6D5] transition-colors">
+              <h3 className="text-xl font-bold text-[#49A5BD] mb-4 transition-colors">
                 {benefit.title}
               </h3>
-              <p className="text-sm text-[#475569] leading-relaxed font-bold tracking-tight">
+              <p className="text-sm text-[#49A5BD] leading-relaxed font-bold tracking-tight">
                 {benefit.description}
               </p>
             </motion.div>

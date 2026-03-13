@@ -62,7 +62,7 @@ export function Nav() {
       <div className="max-container">
         <div className={[
           "flex items-center justify-between px-8 py-4 rounded-2xl transition-all duration-500",
-          scrolled ? "glass-panel bg-white/70 shadow-2xl" : "bg-transparent",
+          scrolled ? "bg-[#FFFFFF] border-2 border-[#49A5BD] shadow-2xl" : "bg-transparent",
         ].join(" ")}>
           
           {/* Logo */}
@@ -76,67 +76,70 @@ export function Nav() {
               priority
             />
             <div className="flex flex-col">
-              <span className="font-black text-xl tracking-tighter text-[#0B1220] leading-none">OMEN</span>
+              <span className="font-black text-xl tracking-tighter text-[#49A5BD] leading-none">OMEN</span>
               <div className="flex items-center gap-1.5">
-                 <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#43B6D5]">Private Alpha V1.0</span>
+                 <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#49A5BD]">Private Alpha V1.0</span>
               </div>
             </div>
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => {
-              const isAnchor = link.href.includes("#");
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => {
-                    if (isAnchor && window.location.pathname === '/') {
-                      e.preventDefault();
-                      scrollToId(link.href.split("#")[1]);
-                    }
-                  }}
-                  className="text-[13px] font-black uppercase tracking-[0.1em] text-[#475569] hover:text-[#43B6D5] transition-all duration-300 relative group"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#43B6D5] transition-all duration-300 group-hover:w-full" />
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-4">
-              {navSocials.map(({ href, label, icon }) => (
-                <a
-                  key={href}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="text-[#94A3B8] transition-all duration-300 hover:text-[#43B6D5] hover:scale-110"
-                >
-                  {icon}
-                </a>
-              ))}
+          {/* Desktop Navigation Group */}
+          <div className="hidden lg:flex items-center gap-12 xl:gap-16">
+            {/* Desktop links */}
+            <div className="flex items-center gap-10">
+              {navLinks.map((link) => {
+                const isAnchor = link.href.includes("#");
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      if (isAnchor && window.location.pathname === '/') {
+                        e.preventDefault();
+                        scrollToId(link.href.split("#")[1]);
+                      }
+                    }}
+                    className="text-[13px] font-black uppercase tracking-[0.1em] text-[#49A5BD] hover:opacity-70 transition-all duration-300 relative group"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#49A5BD] transition-all duration-300 group-hover:w-full" />
+                  </Link>
+                );
+              })}
             </div>
 
-            <div className="h-6 w-px bg-black/[0.05]" />
+            {/* Desktop CTA */}
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
+                {navSocials.map(({ href, label, icon }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="text-[#49A5BD] transition-all duration-300 hover:opacity-70 hover:scale-110"
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
 
-            <Button size="sm" className="h-10 px-6 font-bold bg-[#0B1220] hover:bg-[#0B1220]/90 text-white rounded-xl shadow-md hover:shadow-lg transition-all" onClick={openModal}>
-              Request Early Access
-            </Button>
+              <div className="h-6 w-px bg-[#49A5BD]/10" />
+
+              <Button size="sm" className="h-10 px-6 font-bold bg-[#49A5BD] hover:bg-[#49A5BD]/90 text-[#FFFFFF] rounded-xl border-none" onClick={openModal}>
+                Request Early Access
+              </Button>
+            </div>
           </div>
 
           {/* Mobile toggle */}
           <button
-            className="lg:hidden p-2 text-[#0B1220] rounded-xl hover:bg-black/5 transition-all"
+            className="lg:hidden p-2 text-[#49A5BD] rounded-xl hover:bg-[#49A5BD]/5 transition-all"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
-            {isOpen ? <XClose className="w-6 h-6" /> : <Menu01 className="w-6 h-6" />}
+            {isOpen ? <XClose className="w-6 h-6 text-[#49A5BD]" /> : <Menu01 className="w-6 h-6 text-[#49A5BD]" />}
           </button>
         </div>
 
@@ -157,21 +160,21 @@ export function Nav() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="text-2xl font-extrabold text-[#0B1220] hover:text-[#43B6D5] transition-colors"
+                      className="text-2xl font-extrabold text-[#49A5BD] hover:opacity-70 transition-colors"
                     >
                       {link.name}
                     </Link>
                   ))}
                 </div>
                 
-                <div className="pt-8 border-t border-black/[0.05] space-y-8">
+                <div className="pt-8 border-t border-[#49A5BD]/10 space-y-8">
                   <Button className="w-full h-14 text-lg font-bold rounded-2xl" onClick={() => { setIsOpen(false); openModal(); }}>
                     Request Early Access
                   </Button>
                   
                   <div className="flex items-center justify-center gap-8">
                     {navSocials.map(({ href, label, icon }) => (
-                      <a key={href} href={href} className="text-[#94A3B8] hover:text-[#43B6D5] scale-125">
+                      <a key={href} href={href} className="text-[#49A5BD] hover:opacity-70 scale-125">
                         {icon}
                       </a>
                     ))}
