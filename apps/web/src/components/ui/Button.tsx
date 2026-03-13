@@ -7,6 +7,8 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+import { LoadingSpinner } from "./LoadingSpinner";
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
@@ -65,7 +67,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           <>
             {isLoading && (
-              <span className="mr-2 h-4 w-4 animate-spin border-2 border-current border-t-transparent rounded-full" />
+              <LoadingSpinner 
+                size={size === "lg" ? "md" : "sm"} 
+                className="mr-3" 
+              />
             )}
             {children}
           </>

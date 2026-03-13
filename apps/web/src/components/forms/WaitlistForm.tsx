@@ -40,14 +40,11 @@ export function WaitlistForm({ onSuccess, source = "modal" }: WaitlistFormProps)
       const result = await submitWaitlistAction({ email, source });
 
       if (result.success) {
-        // Trigger EmailJS notification after successful database storage
-        try {
-          await submitEarlyAccessRegistration({ email, source });
-        } catch (emailError) {
-          console.error("Email notification failed:", emailError);
-          // We don't block the UI success for email failure since data is in DB,
-          // but we log it for debugging.
-        }
+        // TRIGGER IN BACKGROUND FOR INSTANT FEEDBACK:
+        // We don't await EmailJS so the user sees "Confirmed" immediately.
+        submitEarlyAccessRegistration({ email, source }).catch(err => {
+          console.error("Background EmailJS notification failed:", err);
+        });
 
         setStatus({ type: "success", message: result.message || "" });
         formRef.current?.reset();
